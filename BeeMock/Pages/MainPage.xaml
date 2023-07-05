@@ -141,78 +141,11 @@
         </ScrollView>
         <Grid x:Name="bottomButtons"
               Grid.Row="1" 
-              ColumnDefinitions="*,*,*,*"
-              >
-            <VerticalStackLayout 
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                >
-                <Label
-                    Text="{Static local:Icons.Home}"
-                    FontSize="25"
-                    FontFamily="icons" 
-                    TextColor="{StaticResource Primary}"
-                     HorizontalOptions="Center"
-                    VerticalTextAlignment="Center"   />
-
-                <Label
-                    Text="Library"
-                    FontSize="12"
-                    TextColor="{StaticResource Primary}"
-                   
-                    VerticalTextAlignment="Center"   />
-            </VerticalStackLayout>
-
-            <VerticalStackLayout 
-                Grid.Column="1"
-                HorizontalOptions="Center" 
-                VerticalOptions="Center">
-                <Label
-                    Text="{Static local:Icons.Doc_Text}"
-                    FontSize="25"
-                    FontFamily="icons" 
-                     HorizontalOptions="Center"
-                    VerticalTextAlignment="Center"   />
-
-                <Label
-                    Text="Library"
-                    FontSize="12"
-                    VerticalTextAlignment="Center"   />
-            </VerticalStackLayout>
-
-            <VerticalStackLayout 
-                Grid.Column="2"
-                HorizontalOptions="Center" 
-                VerticalOptions="Center">
-                <Label
-                    Text="{Static local:Icons.Forumbee}"
-                    FontSize="25"
-                    FontFamily="icons" 
-                     HorizontalOptions="Center"
-                    VerticalTextAlignment="Center"   />
-
-                <Label
-                    Text="Profile"
-                    FontSize="12"
-                    VerticalTextAlignment="Center"   />
-            </VerticalStackLayout>
-
-            <VerticalStackLayout 
-                Grid.Column="3"
-                HorizontalOptions="Center" 
-                VerticalOptions="Center">
-                <Label
-                    Text="{Static local:Icons.Sliders}"
-                    FontSize="25"
-                    FontFamily="icons" 
-                     HorizontalOptions="Center"
-                    VerticalTextAlignment="Center"   />
-
-                <Label
-                    Text="More"
-                    FontSize="12"
-                    VerticalTextAlignment="Center"   />
-            </VerticalStackLayout>
+              ColumnDefinitions="*,*,*,*">
+            <local:IconButton Text="Library"    Icon="{Static local:Icons.Home}"        Grid.Column="0" TextColor="{StaticResource Primary}"></local:IconButton>
+            <local:IconButton Text="Vocabs"     Icon="{Static local:Icons.Doc_Text}"    Grid.Column="1"></local:IconButton>
+            <local:IconButton Text="Profile"    Icon="{Static local:Icons.Forumbee}"    Grid.Column="2"></local:IconButton>
+            <local:IconButton Text="More "      Icon="{Static local:Icons.Sliders}"     Grid.Column="3"></local:IconButton>
         </Grid>
     </Grid>
 </ContentPage>
