@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:local="clr-namespace:BeeMock"
+             x:Class="BeeMock.MainPage">
+    <Grid RowDefinitions="*,100">
+        <ScrollView>
+            <VerticalStackLayout Padding="10">
+                <Grid x:Name="MenuRow">
+                    <Button  
+                HorizontalOptions="Start"
+                Text="Premium"
+                FontSize="10" 
+                VerticalOptions="Center" 
+                Padding="10,0,10,0" 
+                Margin="0" />
+                    <HorizontalStackLayout HorizontalOptions="End" >
+
+                        <Label
+                    Text="{Static local:Icons.Search}"
+                    FontSize="30"
+                    FontFamily="icons" 
+                    TextColor="{StaticResource Primary}"
+                    VerticalTextAlignment="Center"   />
+
+
+                        <Label
+                    Text="{Static local:Icons.Menu}"
+                    FontSize="30"
+                    FontFamily="icons" 
+                    TextColor="{StaticResource Primary}"
+                    VerticalTextAlignment="Center" />
+
+
+                        <Label
+                    Text="Filters"
+                    FontSize="15"
+                    VerticalTextAlignment="Center" />
+
+
+
+                    </HorizontalStackLayout>
+
+
+                </Grid>
+
+                <Label
+                Text="{Binding Title}"
+                FontSize="30"
+                HorizontalOptions="Start" />
+
+                <Button  
+                HorizontalOptions="Start"
+                Text="Avanzado 1"
+                FontSize="10" 
+                VerticalOptions="Center" 
+                Padding="10,0,10,0" 
+                Margin="0" />
+
+                <CarouselView ItemsSource="{Binding Articles}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border
+                            BackgroundColor="{StaticResource Cyan200Accent}"
+                            Margin="10"
+                            Stroke="White"
+                            StrokeShape="RoundRectangle 10 10 10 10"
+                            StrokeThickness="2"
+                            >
+                                    <Grid RowDefinitions=".7*,.1*" >
+                                        <Image Aspect="AspectFill" 
+                                       HeightRequest="190"
+                                
+                                       Source="{Binding ImgSource}" 
+                                       Grid.RowSpan="2" />
+                                        <Border Grid.Row="1"
+                                        Opacity=".8"
+                                   
+                                        StrokeShape="RoundRectangle 0 0 10 10">
+                                            <Label 
+                                        VerticalOptions="Center"
+                                
+                                        Margin="10,0,0,0"
+                                        Text="{Binding Title}"
+                                        ></Label>
+
+                                        </Border>
+
+                                    </Grid>
+
+                                    <Border.Shadow>
+                                        <Shadow
+                                    Brush="Black"
+                                    Radius="20"
+                                    Opacity=".5"
+                                    ></Shadow>
+                                    </Border.Shadow>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+
+                <Grid>
+                    <Label
+                Text="Your Weekly Goal"
+                FontSize="25"
+                HorizontalOptions="Start" />
+                    <Label
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Text="Change goal -->"
+                    FontSize="12"
+                    TextColor="{StaticResource Primary}"
+                />
+                </Grid>
+                <Border
+   
+                Margin="10"
+                Stroke="White"
+                StrokeShape="RoundRectangle 10 10 10 10"
+                StrokeThickness="2" >
+                    <VerticalStackLayout Padding="8">
+                        <Label Text="7-10 stories/week"></Label>
+                    </VerticalStackLayout>
+
+                    <Border.Shadow>
+                        <Shadow
+                                    Brush="Black"
+                                    Radius="20"
+                                    Opacity=".5"
+                                    ></Shadow>
+                    </Border.Shadow>
+                </Border>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+        <Grid x:Name="bottomButtons"
+              Grid.Row="1" 
+              ColumnDefinitions="*,*,*,*"
+              >
+            <VerticalStackLayout 
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                >
+                <Label
+                    Text="{Static local:Icons.Home}"
+                    FontSize="25"
+                    FontFamily="icons" 
+                    TextColor="{StaticResource Primary}"
+                     HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"   />
+
+                <Label
+                    Text="Library"
+                    FontSize="12"
+                    TextColor="{StaticResource Primary}"
+                   
+                    VerticalTextAlignment="Center"   />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout 
+                Grid.Column="1"
+                HorizontalOptions="Center" 
+                VerticalOptions="Center">
+                <Label
+                    Text="{Static local:Icons.Doc_Text}"
+                    FontSize="25"
+                    FontFamily="icons" 
+                     HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"   />
+
+                <Label
+                    Text="Library"
+                    FontSize="12"
+                    VerticalTextAlignment="Center"   />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout 
+                Grid.Column="2"
+                HorizontalOptions="Center" 
+                VerticalOptions="Center">
+                <Label
+                    Text="{Static local:Icons.Forumbee}"
+                    FontSize="25"
+                    FontFamily="icons" 
+                     HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"   />
+
+                <Label
+                    Text="Profile"
+                    FontSize="12"
+                    VerticalTextAlignment="Center"   />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout 
+                Grid.Column="3"
+                HorizontalOptions="Center" 
+                VerticalOptions="Center">
+                <Label
+                    Text="{Static local:Icons.Sliders}"
+                    FontSize="25"
+                    FontFamily="icons" 
+                     HorizontalOptions="Center"
+                    VerticalTextAlignment="Center"   />
+
+                <Label
+                    Text="More"
+                    FontSize="12"
+                    VerticalTextAlignment="Center"   />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
