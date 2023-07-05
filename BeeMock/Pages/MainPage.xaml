@@ -16,27 +16,51 @@
                 Padding="10,0,10,0" 
                 Margin="0" />
                     <HorizontalStackLayout HorizontalOptions="End" >
+                        <Border
+   
+                            Stroke="black"
+                            StrokeShape="RoundRectangle 25 25 25 25"
+                            WidthRequest="45"
+                            Margin="0,0,5,0"
+                            StrokeThickness=".8" >
 
-                        <Label
-                    Text="{Static local:Icons.Search}"
-                    FontSize="30"
-                    FontFamily="icons" 
-                    TextColor="{StaticResource Primary}"
-                    VerticalTextAlignment="Center"   />
+                            <Label
+                                Text="{Static local:Icons.Search}"
+                                FontSize="25"
+                                Margin="5"
+                                FontFamily="icons" 
+                                TextColor="{StaticResource Primary}"
+                                VerticalTextAlignment="Center"  
+                                HorizontalOptions="Center"/>
+                        </Border>
+
+                        <Border
+   
+                            Stroke="black"
+                            StrokeShape="RoundRectangle 25 25 25 25"
+                            Padding="10,0,10,0"
+                            Margin="0,0,5,0"
+                            StrokeThickness=".8" >
+
+                            <HorizontalStackLayout>
+                                <Label
+                                    Text="{Static local:Icons.Menu}"
+                                    FontSize="30"
+                                    FontFamily="icons" 
+                                    Margin="0,0,5,0"
+                                    TextColor="{StaticResource Primary}"
+                                    VerticalTextAlignment="Center" />
 
 
-                        <Label
-                    Text="{Static local:Icons.Menu}"
-                    FontSize="30"
-                    FontFamily="icons" 
-                    TextColor="{StaticResource Primary}"
-                    VerticalTextAlignment="Center" />
-
-
-                        <Label
+                                <Label
                     Text="Filters"
                     FontSize="15"
                     VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+                        
+
+
 
 
 
@@ -130,7 +154,7 @@
                     <Border.Shadow>
                         <Shadow
                                     Brush="Black"
-                                    Radius="20"
+                                    Radius="10"
                                     Opacity=".5"
                                     ></Shadow>
                     </Border.Shadow>

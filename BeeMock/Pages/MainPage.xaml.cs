@@ -17,7 +17,9 @@ public static class Icons
 
 public partial class MainPage : ContentPage, INotifyPropertyChanged
 {
-    public string Title { get; set; }
+
+    private string _Title;
+    public string Title { get { return _Title; } set { if (_Title == value) return; _Title = value; OnPropertyChanged(); } }
     public ObservableCollection<Article> Articles { get; set; }
 	public MainPage()
     {
