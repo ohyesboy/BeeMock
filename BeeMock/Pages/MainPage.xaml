@@ -82,7 +82,9 @@
                 Padding="10,0,10,0" 
                 Margin="0" />
 
-                <CarouselView ItemsSource="{Binding Articles}">
+                <CarouselView 
+                    ItemsSource="{Binding Articles}"
+                    PeekAreaInsets="1">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -130,16 +132,16 @@
 
                 <Grid>
                     <Label
-                Text="Your Weekly Goal"
-                FontSize="25"
-                HorizontalOptions="Start" />
+                        Text="Your Weekly Goal"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="25"
+                        HorizontalOptions="Start" />
                     <Label
-                    HorizontalOptions="End"
-                    VerticalOptions="Center"
-                    Text="Change goal -->"
-                    FontSize="12"
-                    TextColor="{StaticResource Primary}"
-                />
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Text="Change goal -->"
+                        FontSize="12"
+                        TextColor="{StaticResource Primary}"/>
                 </Grid>
                 <Border
    
@@ -148,7 +150,11 @@
                 StrokeShape="RoundRectangle 10 10 10 10"
                 StrokeThickness="2" >
                     <VerticalStackLayout Padding="8">
-                        <Label Text="7-10 stories/week"></Label>
+                        <Label
+                            Text="7-10 stories/week"
+                            FontFamily="OpenSansSemibold"
+                            Margin="0,0,0,10"/>
+                        <local:ProgressDash Value="4" />
                     </VerticalStackLayout>
 
                     <Border.Shadow>
@@ -159,7 +165,20 @@
                                     ></Shadow>
                     </Border.Shadow>
                 </Border>
-
+                <Grid>
+                    <Label
+                        Text="Reading challenges"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="25"
+                        HorizontalOptions="Start" />
+                    <Label
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Text="4 challengesl -->"
+                        FontSize="12"
+                        TextColor="{StaticResource Primary}"
+                />
+                </Grid>
             </VerticalStackLayout>
 
         </ScrollView>
@@ -171,5 +190,7 @@
             <local:IconButton Text="Profile"    Icon="{Static local:Icons.Forumbee}"    Grid.Column="2"></local:IconButton>
             <local:IconButton Text="More "      Icon="{Static local:Icons.Sliders}"     Grid.Column="3"></local:IconButton>
         </Grid>
+        
+        
     </Grid>
 </ContentPage>
