@@ -51,6 +51,8 @@
 	  <None Remove="Resources\Images\cold.png" />
 	  <None Remove="Resources\Images\Logo.PNG" />
 	  <None Remove="Resources\Images\sea.PNG" />
+	  <None Remove="Resources\Images\small1.png" />
+	  <None Remove="Resources\Images\small2.png" />
 	</ItemGroup>
 
 	<ItemGroup>

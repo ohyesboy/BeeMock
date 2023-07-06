@@ -21,7 +21,8 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
     private string _Title;
     public string Title { get { return _Title; } set { if (_Title == value) return; _Title = value; OnPropertyChanged(); } }
     public ObservableCollection<Article> Articles { get; set; }
-	public MainPage()
+    public ObservableCollection<Article> Articles2 { get; set; }
+    public MainPage()
     {
         InitializeComponent();
         Title = "Titles";
@@ -29,6 +30,12 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
         {
             new Article(){Title="Summer Frenzy", ImgSource="sea.png"},
             new Article(){Title="Tokyo cold", ImgSource="cold.png"},
+        };
+
+        Articles2 = new ObservableCollection<Article>()
+        {
+            new Article(){Title="Explorer the US (Advanced)", ImgSource="small1.png"},
+            new Article(){Title="Explore Mexico (Beginner)", ImgSource="small2.png"},
         };
         this.BindingContext = this;
 
