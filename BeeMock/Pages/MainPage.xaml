@@ -68,21 +68,43 @@
 
 
                 </Grid>
-
                 <Label 
                     Text="Library"
                     FontFamily="OpenSansSemibold"
                     FontSize="30"
                     HorizontalOptions="Start" />
-
-                <Button  
-                HorizontalOptions="Start"
-                Text="Avanzado 1"
-                FontSize="10" 
-                VerticalOptions="Center" 
-                Padding="10,0,10,0" 
-                Margin="0" />
-
+                <HorizontalStackLayout>
+                   
+                    <Border
+                    HorizontalOptions="Start" 
+                    Padding="5"
+                    Stroke="Black"
+                    StrokeShape="RoundRectangle 10 10 10 10"
+                    StrokeThickness="1">
+                        <Label  
+                        HorizontalOptions="Start"
+                        Text="Avanzado 1"
+                        FontSize="10" 
+                        VerticalOptions="Center" 
+                        Padding="10,0,10,0" 
+                        Margin="0" />
+                    </Border>
+                    <Border
+                    HorizontalOptions="Start" 
+                    Padding="5"
+                    Stroke="Black"
+                    StrokeShape="RoundRectangle 10 10 10 10"
+                    StrokeThickness="1">
+                        <Label  
+                        HorizontalOptions="Start"
+                        Text="Traval"
+                        FontSize="10" 
+                        VerticalOptions="Center" 
+                        Padding="10,0,10,0" 
+                        Margin="0" />
+                    </Border>
+                </HorizontalStackLayout>
+               
                 <CarouselView 
                     ItemsSource="{Binding Articles}"
                     PeekAreaInsets="1">
@@ -227,7 +249,67 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                
+
+
+                <Grid x:Name="readingChallenges2">
+                    <Label
+                        Text="Reading challenges"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="25"
+                        HorizontalOptions="Start" />
+                    <Label
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Text="4 challengesl -->"
+                        FontSize="12"
+                        TextColor="{StaticResource Primary}"
+                />
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding Articles2}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border
+                                    BackgroundColor="{StaticResource Cyan200Accent}"
+                                    Margin="8"
+                                    Stroke="White"
+                                    StrokeShape="RoundRectangle 10 10 10 10"
+                                    StrokeThickness="2">
+                                    <VerticalStackLayout>
+                                        <Image Aspect="AspectFill" 
+                                           HeightRequest="100"
+                                
+                                           Source="{Binding ImgSource}" 
+                                           Grid.RowSpan="2" />
+                                        <Border Grid.Row="1"
+                                            Opacity=".9" 
+                                                HeightRequest="60">
+                                            <Label 
+                                                VerticalOptions="Center"                    
+                                                Margin="10,0,0,0"
+                                                Text="{Binding Title}"
+                                        ></Label>
+
+                                        </Border>
+
+                                    </VerticalStackLayout>
+
+                                    <Border.Shadow>
+                                        <Shadow
+                                    Brush="Black"
+                                    Radius="20"
+                                    Opacity=".5"
+                                    ></Shadow>
+                                    </Border.Shadow>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
 
         </ScrollView>
