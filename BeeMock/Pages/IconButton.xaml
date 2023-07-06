@@ -1,24 +1,64 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BeeMock"
              x:Class="BeeMock.IconButton">
-    <VerticalStackLayout       
-        HorizontalOptions="Center" 
-        VerticalOptions="Center">
-        <Label
-            x:Name="icon"
-            Text="{Binding Icon}"
-            TextColor="{Binding TextColor}"
-            FontSize="25"
-            FontFamily="icons" 
-            HorizontalOptions="Center"
-            VerticalTextAlignment="Center"   />
+    <ContentView.Resources>
+        <ResourceDictionary>
+        <Style TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger  TargetType="Label" Binding="{Binding Selected}" Value="True">
+                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                </DataTrigger>
+            </Style.Triggers>
 
-        <Label
-            Text="{Binding Text}"
-            TextColor="{Binding TextColor}"
-            FontSize="12"
-            VerticalTextAlignment="Center"   />
-    </VerticalStackLayout>
+        </Style>
+        </ResourceDictionary>
+
+    </ContentView.Resources>
+    <Grid x:Name="bottomButtons"
+              
+        ColumnDefinitions="*,*,*,*">
+        <CollectionView ItemsSource="{Binding Buttons}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"  />
+                
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                 <DataTemplate>
+                 <VerticalStackLayout
+                    
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="Center">
+
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label
+                            x:Name="icon"
+                            Text="{Binding Icon}"
+                          
+                            FontSize="25"
+                            FontFamily="icons" 
+                            HorizontalOptions="Center"
+                            VerticalTextAlignment="Center">
+
+                        </Label>
+
+                        <Label
+                            Text="{Binding Text}"
+                            FontSize="12"
+                            VerticalTextAlignment="Center"   />
+                    </VerticalStackLayout>
+
+            </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+
+
+
 </ContentView>
