@@ -30,10 +30,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (P9L8A4G2PA)</CodesignKey>
-	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
-	</PropertyGroup>
+
 
 	<ItemGroup>
 		<!-- App Icon -->
@@ -61,7 +58,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\logo.png" Color="White" />
+	  <MauiSplashScreen Include="Resources\Splash\logo.png" Color="White" BaseSize="128,128"/>
 	</ItemGroup>
 
 	<ItemGroup>
