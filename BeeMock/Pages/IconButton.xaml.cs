@@ -11,20 +11,22 @@ public partial class IconButton : ContentView
     public IconButton()
 	{
 		InitializeComponent();
-		Buttons.Add(new IconButtonModel { Icon = Icons.Doc_Text, Selected = true, Text = "Doc" });
-        Buttons.Add(new IconButtonModel { Icon = Icons.Menu, Text = "Options" });
-		var index = 0;
-		foreach(var b in Buttons)
-		{
-			b.Order = index++;
-		}
+		Buttons.Add(new IconButtonModel { Icon = Icons.Home, Selected = true, Text = "Library" });
+        Buttons.Add(new IconButtonModel { Icon = Icons.Doc_Text, Text = "Vocabs" });
+        Buttons.Add(new IconButtonModel { Icon = Icons.Forumbee, Text = "Bees" });
+        Buttons.Add(new IconButtonModel { Icon = Icons.Sliders, Text = "More" });
         this.BindingContext = this;
 
 	}
 
     void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-		
+		var model = ((sender as BindableObject).BindingContext) as IconButtonModel;
+		foreach(var b in Buttons)
+		{
+			b.Selected = false;
+		}
+		model.Selected = true;
 
     }
 }
@@ -36,8 +38,6 @@ public class IconButtonModel: INotifyPropertyChanged {
     public string Text { get { return _Text; } set { if (_Text == value) return; _Text = value; OnPropertyChanged(); } }
 	bool _Selected;
 	public bool Selected { get => _Selected; set { if (_Selected == value) return; _Selected = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Selected))); } }
-	int _Order;
-	public int Order { get => _Order; set { if (_Order == value) return; _Order = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Order))); } }
 	public event PropertyChangedEventHandler PropertyChanged;
 
 	public void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -5,59 +5,51 @@
              x:Class="BeeMock.IconButton">
     <ContentView.Resources>
         <ResourceDictionary>
-        <Style TargetType="Label">
-            <Style.Triggers>
-                <DataTrigger  TargetType="Label" Binding="{Binding Selected}" Value="True">
-                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                </DataTrigger>
-            </Style.Triggers>
+            <Style TargetType="Label">
+                <Style.Triggers>
+                    <DataTrigger  TargetType="Label" Binding="{Binding Selected}" Value="True">
+                        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                    </DataTrigger>
+                </Style.Triggers>
 
-        </Style>
+            </Style>
         </ResourceDictionary>
 
     </ContentView.Resources>
-    <Grid x:Name="bottomButtons"
-              
-        ColumnDefinitions="*,*,*,*">
-        <CollectionView ItemsSource="{Binding Buttons}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"  />
-                
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                 <DataTemplate>
-                 <VerticalStackLayout
+
+    <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Buttons}" >
+
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <VerticalStackLayout
                     
                         HorizontalOptions="FillAndExpand" 
                         VerticalOptions="Center">
 
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                        </VerticalStackLayout.GestureRecognizers>
-                        <Label
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Label
                             x:Name="icon"
                             Text="{Binding Icon}"
-                          
+                            
                             FontSize="25"
                             FontFamily="icons" 
                             HorizontalOptions="Center"
                             VerticalTextAlignment="Center">
 
-                        </Label>
+                    </Label>
 
-                        <Label
+                    <Label
                             Text="{Binding Text}"
                             FontSize="12"
-                            VerticalTextAlignment="Center"   />
-                    </VerticalStackLayout>
-
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Center"/>
+                </VerticalStackLayout>
             </DataTemplate>
 
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
-
-    </Grid>
+        </BindableLayout.ItemTemplate>
+    </StackLayout>
 
 
 
