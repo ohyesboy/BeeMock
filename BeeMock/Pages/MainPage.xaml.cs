@@ -18,14 +18,23 @@ public static class Icons
 public partial class MainPage : ContentPage, INotifyPropertyChanged
 {
 
+    public MainPageModel Model { get; set; }
+
     private string _Title;
     public string Title { get { return _Title; } set { if (_Title == value) return; _Title = value; OnPropertyChanged(); } }
     public ObservableCollection<Article> Articles { get; set; }
     public ObservableCollection<Article> Articles2 { get; set; }
     public MainPage()
     {
+        Model = ServiceHelper.GetService<MainPageModel>();
+        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Home, Selected = true, Text = "Library", View = new NewContent1() });
+        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Doc_Text, Text = "Vocabs", View = new NewContent2() });
+        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Forumbee, Text = "Bees", View = new NewContent1() });
+        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Sliders, Text = "More", View = new NewContent1() });
+
         InitializeComponent();
         Title = "Titles";
+        
         Articles = new ObservableCollection<Article>()
         {
             new Article(){Title="Summer Frenzy", ImgSource="sea.png"},
@@ -37,10 +46,33 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
             new Article(){Title="Explorer the US (Advanced)", ImgSource="small1.png"},
             new Article(){Title="Explore Mexico (Beginner)", ImgSource="small2.png"},
         };
-        this.BindingContext = this;
+        this.BindingContext = Model;
 
     }
 }
+
+public class MainPageModel: INotifyPropertyChanged
+{
+
+    ObservableCollection<IconButtonModel> _Buttons;
+    public ObservableCollection<IconButtonModel> Buttons { get => _Buttons; set { if (_Buttons == value) return; _Buttons = value; OnPropertyChanged(); } }
+
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+
+    public MainPageModel()
+    {
+        Buttons = new ObservableCollection<IconButtonModel>();
+    }
+
+}
+
 public class Article
 {
     public string Title { get; set; }

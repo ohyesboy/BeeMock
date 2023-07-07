@@ -6,7 +6,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
         UserAppTheme = AppTheme.Light;
-        MainPage = new TabbedPage1();
+        MainPage = new MainPage();
 	}
 
     protected override Window CreateWindow(IActivationState activationState)

@@ -6,31 +6,30 @@ namespace BeeMock;
 
 public partial class IconButton : ContentView
 {
-
-	public ObservableCollection<IconButtonModel> Buttons { get; set; } = new ObservableCollection<IconButtonModel>();
+	
+	public ObservableCollection<IconButtonModel> Buttons { get; set; }
     public IconButton()
 	{
 		InitializeComponent();
-		Buttons.Add(new IconButtonModel { Icon = Icons.Home, Selected = true, Text = "Library" });
-        Buttons.Add(new IconButtonModel { Icon = Icons.Doc_Text, Text = "Vocabs" });
-        Buttons.Add(new IconButtonModel { Icon = Icons.Forumbee, Text = "Bees" });
-        Buttons.Add(new IconButtonModel { Icon = Icons.Sliders, Text = "More" });
-        this.BindingContext = this;
+		var buttons = ServiceHelper.GetService<MainPageModel>();
+		Buttons = buttons.Buttons;
 
-	}
+        this.BindingContext = buttons;
+
+    }
 
     void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
 		var model = ((sender as BindableObject).BindingContext) as IconButtonModel;
-		foreach(var b in Buttons)
+		foreach (var b in Buttons)
 		{
 			b.Selected = false;
 		}
 		model.Selected = true;
 
-		Navigation.PushAsync(new VocabPage());
 
-    }
+
+	}
 }
 
 public class IconButtonModel: INotifyPropertyChanged {
@@ -40,6 +39,10 @@ public class IconButtonModel: INotifyPropertyChanged {
     public string Text { get { return _Text; } set { if (_Text == value) return; _Text = value; OnPropertyChanged(); } }
 	bool _Selected;
 	public bool Selected { get => _Selected; set { if (_Selected == value) return; _Selected = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Selected))); } }
+
+	ContentView _View;
+	public ContentView View { get => _View; set { if (_View == value) return; _View = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(View))); } }
+
 	public event PropertyChangedEventHandler PropertyChanged;
 
 	public void OnPropertyChanged([CallerMemberName] string propertyName = null)
