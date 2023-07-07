@@ -32,6 +32,9 @@
 
 
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -58,7 +61,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\logo.png" Color="White" BaseSize="128,128"/>
+	  <MauiSplashScreen Include="Resources\Splash\logo.png" Color="White" BaseSize="128,128" />
 	</ItemGroup>
 
 	<ItemGroup>

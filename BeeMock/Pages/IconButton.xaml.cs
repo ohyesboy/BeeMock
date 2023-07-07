@@ -28,6 +28,8 @@ public partial class IconButton : ContentView
 		}
 		model.Selected = true;
 
+		Navigation.PushAsync(new VocabPage());
+
     }
 }
 

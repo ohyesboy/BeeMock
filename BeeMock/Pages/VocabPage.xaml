@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BeeMock"
+             
+  
+             x:Class="BeeMock.VocabPage">
+    <Grid RowDefinitions="*,100">
+        <ScrollView>
+            <Label Text="Vocabs" />
+        </ScrollView>
+        <local:IconButton Grid.Row="1"></local:IconButton>
+        
+    </Grid>
+</ContentPage>
