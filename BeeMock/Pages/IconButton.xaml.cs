@@ -6,26 +6,24 @@ namespace BeeMock;
 
 public partial class IconButton : ContentView
 {
-	
-	public ObservableCollection<IconButtonModel> Buttons { get; set; }
+	MainPageModel mainModel;
     public IconButton()
 	{
 		InitializeComponent();
-		var buttons = ServiceHelper.GetService<MainPageModel>();
-		Buttons = buttons.Buttons;
-
-        this.BindingContext = buttons;
+		mainModel = ServiceHelper.GetService<MainPageModel>();
+        this.BindingContext = mainModel;
 
     }
 
     void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
 		var model = ((sender as BindableObject).BindingContext) as IconButtonModel;
-		foreach (var b in Buttons)
+		foreach (var b in mainModel.Buttons)
 		{
 			b.Selected = false;
 		}
 		model.Selected = true;
+		mainModel.CurrentView = model.View;
 	}
 }
 

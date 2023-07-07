@@ -27,11 +27,11 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
     public MainPage(MainPageModel model)
     {
         Model = model;
-        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Home, Selected = true, Text = "Library", View = new NewContent1() });
+        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Home, Selected = true, Text = "Library", View = new LibraryView(Model) });
         Model.Buttons.Add(new IconButtonModel { Icon = Icons.Doc_Text, Text = "Vocabs", View = new NewContent2() });
-        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Forumbee, Text = "Bees", View = new NewContent1() });
-        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Sliders, Text = "More", View = new NewContent1() });
-
+        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Forumbee, Text = "Bees", View = new LibraryView(Model) });
+        Model.Buttons.Add(new IconButtonModel { Icon = Icons.Sliders, Text = "More", View = new LibraryView(Model) });
+        Model.CurrentView = Model.Buttons[0].View;
         InitializeComponent();
         Title = "Titles";
         
@@ -56,6 +56,10 @@ public class MainPageModel: INotifyPropertyChanged
 
     ObservableCollection<IconButtonModel> _Buttons;
     public ObservableCollection<IconButtonModel> Buttons { get => _Buttons; set { if (_Buttons == value) return; _Buttons = value; OnPropertyChanged(); } }
+
+
+    ContentView _CurrentView;
+    public ContentView CurrentView { get => _CurrentView; set { if (_CurrentView == value) return; _CurrentView = value; OnPropertyChanged(); } }
 
 
     public event PropertyChangedEventHandler PropertyChanged;

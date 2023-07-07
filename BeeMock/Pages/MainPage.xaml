@@ -12,7 +12,7 @@
                  <Label  Text="{Binding Buttons[0].Text}" IsVisible="{Binding Buttons[0].Selected}"/>
                  <Label  Text="{Binding Buttons[1].Text}" IsVisible="{Binding Buttons[1].Selected}"/>
                  <Label  Text="Bee" IsVisible="{Binding Buttons[2].Selected}"/>
-
+                 <ContentView Content="{Binding CurrentView}" />
             </VerticalStackLayout>
 
         </ScrollView>
