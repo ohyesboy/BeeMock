@@ -6,8 +6,8 @@ public partial class App : Application
 	{
 		InitializeComponent();
         UserAppTheme = AppTheme.Light;
-        MainPage = new MainPage();
-	}
+        MainPage = ServiceHelper.GetService<MainPage>();
+    }
 
     protected override Window CreateWindow(IActivationState activationState)
     {

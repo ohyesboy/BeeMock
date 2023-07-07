@@ -26,9 +26,6 @@ public partial class IconButton : ContentView
 			b.Selected = false;
 		}
 		model.Selected = true;
-
-
-
 	}
 }
 
