@@ -6,7 +6,7 @@
     x:Class="BeeMock.LibraryView">
     <VerticalStackLayout>
         <Grid
-            x:Name="MenuRow">
+            x:Name="MenuRow" >
             <Button
                 HorizontalOptions="Start"
                 Text="Premium"
@@ -60,54 +60,8 @@
         </Grid>
 
 
-
-
-        <CarouselView
-            ItemsSource="{Binding Articles}"
-            HeightRequest="200"
-            PeekAreaInsets="1">
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Border
-                            Margin="10"
-                            StrokeShape="RoundRectangle 10 10 10 10">
-                            <Grid
-                                RowDefinitions=".7*,.3*" >
-                                <Image
-                                    Aspect="AspectFill"
-                                    HeightRequest="190"
-                                    Source="{Binding ImgSource}"
-                                    Grid.RowSpan="2" />
-                                <Border
-                                    Grid.Row="1"
-                                    Opacity=".9"
-                                    BackgroundColor="White"
-                                    VerticalOptions="End"
-
-                                    Margin="-2,0,-1,-2"
-                                    HeightRequest="60">
-                                    <Label
-                                        VerticalOptions="Center"
-                                        BackgroundColor="White"
-                                        Padding="10,0,0,0"
-                                        Text="{Binding Title}"></Label>
-
-                                </Border>
-
-                            </Grid>
-
-                            <Border.Shadow>
-                                <Shadow
-                                    Brush="Black"
-                                    Radius="5"
-                                    Opacity=".3"></Shadow>
-                            </Border.Shadow>
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
+        <local:ArticleSlideControl Articles="{Binding Articles}" />
+        
 
 
         <Grid
@@ -135,7 +89,7 @@
                     FontFamily="OpenSansSemibold"
                     Margin="0,0,0,10" />
                 <local:ProgressDash
-                    Value="4" />
+                    Value="{Binding Value2}" />
             </VerticalStackLayout>
 
 
@@ -160,51 +114,7 @@
 
 
 
-        <CarouselView
-            ItemsSource="{Binding Articles2}"
-        HeightRequest="200"
-            PeekAreaInsets="2">
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Border
-                            Margin="10"
-                            StrokeShape="RoundRectangle 10 10 10 10">
-                            <Grid
-                                RowDefinitions=".7*,.3*">
-                                <Image
-                                    Aspect="AspectFill" 
-                                    HeightRequest="190"
-                                    Source="{Binding ImgSource}"
-                                    Grid.RowSpan="2" />
-                                <Border
-                                    Grid.Row="1"
-                                    Opacity=".9"
-                                    BackgroundColor="White"
-                                    VerticalOptions="End"
-
-                                    Margin="-2,0,-1,-2"
-                                    HeightRequest="60">
-                                    <Label
-                                        VerticalOptions="Center"
-                                        Margin="10,0,0,0"
-                                        Text="{Binding Title}"></Label>
-
-                                </Border>
-
-                            </Grid>
-
-                            <Border.Shadow>
-                                <Shadow
-                                    Brush="Black"
-                                    Radius="5"
-                                    Opacity=".3"></Shadow>
-                            </Border.Shadow>
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
 
 
 
