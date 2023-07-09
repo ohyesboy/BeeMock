@@ -31,7 +31,7 @@ public partial class ProgressDash : HorizontalStackLayout
         var density = DeviceDisplay.Current.MainDisplayInfo.Density;
 
         RecWidth = width/density/12;
-        RecHeight = RecWidth / 3.5;
+        RecHeight = RecWidth / 2.5;
         
         //this.BindingContext = Model;
     }

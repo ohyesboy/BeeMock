@@ -22,15 +22,22 @@ public partial class IconButton : ContentView
 
     void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
+		
 		var model = ((sender as BindableObject).BindingContext) as IconButtonModel;
-		foreach (var b in mainModel.Buttons)
+
+		if (model.Selected)
+			return;
+
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+
+        foreach (var b in mainModel.Buttons)
 		{
 			b.Selected = false;
 		}
 		model.Selected = true;
 		mainModel.CurrentView = model.View;
 
-	}
+    }
 
 }
 
