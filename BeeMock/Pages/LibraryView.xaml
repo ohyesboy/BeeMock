@@ -73,7 +73,7 @@
                             Margin="10"
                             StrokeShape="RoundRectangle 10 10 10 10">
                             <Grid
-                                RowDefinitions=".7*,.1*">
+                                RowDefinitions=".7*,.3*">
                                 <Image
                                     Aspect="AspectFill"
                                     HeightRequest="190"
@@ -171,9 +171,9 @@
                             Margin="10"
                             StrokeShape="RoundRectangle 10 10 10 10">
                             <Grid
-                                RowDefinitions=".7*,.1*">
+                                RowDefinitions=".7*,.3*">
                                 <Image
-                                    Aspect="AspectFill"
+                                    Aspect="AspectFill" 
                                     HeightRequest="190"
                                     Source="{Binding ImgSource}"
                                     Grid.RowSpan="2" />
