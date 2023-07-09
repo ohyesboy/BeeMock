@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:BeeMock"
+    x:Name="this"
     x:Class="BeeMock.LibraryView">
     <VerticalStackLayout>
         <Grid
@@ -12,7 +13,7 @@
                 Text="Premium"
                 FontSize="10"
                 VerticalOptions="Center"
-                Clicked="Button_Clicked"
+                Command="{Binding Path=UpdateValueCommand, Source={Reference this}}"
                 Padding="10,0,10,0"
                 Margin="0" />
             <HorizontalStackLayout

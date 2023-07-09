@@ -1,4 +1,7 @@
-﻿namespace BeeMock;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+namespace BeeMock;
 
 public partial class LibraryView : ContentView
 {
@@ -10,12 +13,10 @@ public partial class LibraryView : ContentView
 		this.BindingContext = Model;
 	}
 
-    void Button_Clicked(System.Object sender, System.EventArgs e)
+
+    [RelayCommand]
+    void UpdateValue()
     {
         Model.Value2 = 3;
-    }
-
-    void Button_Clicked_1(System.Object sender, System.EventArgs e)
-    {
     }
 }
