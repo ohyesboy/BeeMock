@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Storage;
 
 namespace BeeMock;
 
@@ -9,6 +11,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -21,7 +24,7 @@ public static class MauiProgram
 #endif
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainPageModel>();
-
+		builder.Services.AddSingleton<IFileSaver>(FileSaver.Default);
         return builder.Build();
 	}
 }

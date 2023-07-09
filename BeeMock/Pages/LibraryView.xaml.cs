@@ -15,4 +15,7 @@ public partial class LibraryView : ContentView
         Model.Value2 = 3;
     }
 
+    void Button_Clicked_1(System.Object sender, System.EventArgs e)
+    {
+    }
 }

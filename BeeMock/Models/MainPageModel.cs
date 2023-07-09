@@ -1,40 +1,30 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+//using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace BeeMock;
 
-public class MainPageModel : INotifyPropertyChanged
+public partial class MainPageModel : ObservableObject
 {
-    
-    string _Title;
-    public string Title { get => _Title; set { if (_Title == value) return; _Title = value; OnPropertyChanged(); } }
+    [ObservableProperty]
+    string title;
 
+    [ObservableProperty]
+    int value2;
 
-    int _Value2;
-    public int Value2 { get => _Value2; set { if (_Value2 == value) return; _Value2 = value; OnPropertyChanged(); } }
-
-
+    [ObservableProperty]
     ObservableCollection<IconButtonModel> _Buttons;
-    public ObservableCollection<IconButtonModel> Buttons { get => _Buttons; set { if (_Buttons == value) return; _Buttons = value; OnPropertyChanged(); } }
 
-
+    [ObservableProperty]
     ContentView _CurrentView;
-    public ContentView CurrentView { get => _CurrentView; set { if (_CurrentView == value) return; _CurrentView = value; OnPropertyChanged(); } }
 
+    [ObservableProperty]
+    ObservableCollection<Article> articles = new ObservableCollection<Article>();
+    [ObservableProperty]
+    ObservableCollection<Article> articles2 = new ObservableCollection<Article>();
 
-    public ObservableCollection<Article> Articles { get; set; } = new ObservableCollection<Article>();
-    public ObservableCollection<Article> Articles2 { get; set; } = new ObservableCollection<Article>();
-
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-
+    
     public MainPageModel()
     {
         Buttons = new ObservableCollection<IconButtonModel>();

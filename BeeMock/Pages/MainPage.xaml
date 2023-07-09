@@ -11,11 +11,12 @@
         RowDefinitions="*,Auto">
 
 
-        
         <ScrollView VerticalScrollBarVisibility="Never" >
-           <ContentView Content="{Binding CurrentView}" />
+
+            <ContentView Content="{Binding CurrentView}" />
 
         </ScrollView>
+
 
 
         <local:IconButton
