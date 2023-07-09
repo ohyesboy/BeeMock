@@ -17,6 +17,18 @@ public partial class LibraryView : ContentView
     [RelayCommand]
     void UpdateValue()
     {
-        Model.Value2 = 3;
+
+        string fileDir = Path.Combine(FileSystem.Current.CacheDirectory,"bee") ;
+        string filePath = Path.Combine(fileDir, "input.txt") ;
+        if (!Directory.Exists(fileDir))
+            Directory.CreateDirectory(fileDir);
+        if(!File.Exists(filePath))
+        {
+
+            File.WriteAllText(filePath, "this is 测试");
+        }
+
+        var content = File.ReadAllText(filePath);
+
     }
 }
