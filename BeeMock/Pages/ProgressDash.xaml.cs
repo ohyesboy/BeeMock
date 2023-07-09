@@ -7,6 +7,14 @@ namespace BeeMock;
 public partial class ProgressDash : HorizontalStackLayout
 {
 
+
+    double _RecWidth;
+    public double RecWidth { get => _RecWidth; set { if (_RecWidth == value) return; _RecWidth = value; OnPropertyChanged(); } }
+
+
+    double _RecHeight;
+    public double RecHeight { get => _RecHeight; set { if (_RecHeight == value) return; _RecHeight = value; OnPropertyChanged(); } }
+
     public ObservableCollection<ProgressDot> Progress { get; set; } = new ObservableCollection<ProgressDot>();
 
 
@@ -19,6 +27,12 @@ public partial class ProgressDash : HorizontalStackLayout
     public ProgressDash()
     {
         InitializeComponent();
+        var width = DeviceDisplay.Current.MainDisplayInfo.Width;
+        var density = DeviceDisplay.Current.MainDisplayInfo.Density;
+
+        RecWidth = width/density/12;
+        RecHeight = RecWidth / 3.5;
+        
         //this.BindingContext = Model;
     }
 
