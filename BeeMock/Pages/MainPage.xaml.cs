@@ -22,7 +22,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
     private string _Title;
     public string Title { get { return _Title; } set { if (_Title == value) return; _Title = value; OnPropertyChanged(); } }
-  
+
     public MainPage(MainPageModel model)
     {
         Model = model;
@@ -39,7 +39,9 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
         Model.Articles.Add(new Article() { Title = "Tokyo cold", ImgSource = "cold.png" });
 
         Model.Articles2.Add(new Article() { Title = "Explorer the US (Advanced)", ImgSource = "small1.png" });
-       Model.Articles2.Add(new Article() { Title = "Explore Mexico (Beginner)", ImgSource = "small2.png" });
+        Model.Articles2.Add(new Article() { Title = "Explorer China (Advanced)", ImgSource = "small1.png" });
+        Model.Articles2.Add(new Article() { Title = "Explore Mexico (Beginner)", ImgSource = "small2.png" });
+        Model.Articles2.Add(new Article() { Title = "Explore Europe (Beginner)", ImgSource = "small2.png" });
 
         for (var i = 0; i < 10; i++)
         {
@@ -53,7 +55,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
     }
 }
 
-public class MainPageModel: INotifyPropertyChanged
+public class MainPageModel : INotifyPropertyChanged
 {
     public ObservableCollection<ProgressDot> Progress { get; set; } = new ObservableCollection<ProgressDot>();
 

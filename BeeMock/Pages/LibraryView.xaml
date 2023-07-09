@@ -1,58 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:BeeMock"
-             x:Class="BeeMock.LibraryView">
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BeeMock"
+    x:Class="BeeMock.LibraryView">
     <VerticalStackLayout>
-        <Grid x:Name="MenuRow">
-            <Button  
+        <Grid
+            x:Name="MenuRow">
+            <Button
                 HorizontalOptions="Start"
                 Text="Premium"
-                FontSize="10" 
-                VerticalOptions="Center" 
-                Padding="10,0,10,0" 
+                FontSize="10"
+                VerticalOptions="Center"
+                Padding="10,0,10,0"
                 Margin="0" />
-            <HorizontalStackLayout HorizontalOptions="End" >
+            <HorizontalStackLayout
+                HorizontalOptions="End">
                 <Border
-   
-                            Stroke="black"
-                            StrokeShape="RoundRectangle 25 25 25 25"
-                            WidthRequest="45"
-                            Margin="0,0,5,0"
-                            StrokeThickness=".8" >
+                    Stroke="black"
+                    StrokeShape="RoundRectangle 25 25 25 25"
+                    WidthRequest="45"
+                    Margin="0,0,5,0"
+                    StrokeThickness=".8">
 
                     <Label
-                                Text="{Static local:Icons.Search}"
-                                FontSize="25"
-                                Margin="5"
-                                FontFamily="icons" 
-                                TextColor="{StaticResource Primary}"
-                                VerticalTextAlignment="Center"  
-                                HorizontalOptions="Center"/>
+                        Text="{Static local:Icons.Search}"
+                        FontSize="25"
+                        Margin="5"
+                        FontFamily="icons"
+                        TextColor="{StaticResource Primary}"
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="Center" />
                 </Border>
 
                 <Border
-   
-                            Stroke="black"
-                            StrokeShape="RoundRectangle 25 25 25 25"
-                            Padding="10,0,10,0"
-                            Margin="0,0,5,0"
-                            StrokeThickness=".8" >
+                    Stroke="black"
+                    StrokeShape="RoundRectangle 25 25 25 25"
+                    Padding="10,0,10,0"
+                    Margin="0,0,5,0"
+                    StrokeThickness=".8">
 
                     <HorizontalStackLayout>
                         <Label
-                                    Text="{Static local:Icons.Menu}"
-                                    FontSize="30"
-                                    FontFamily="icons" 
-                                    Margin="0,0,5,0"
-                                    TextColor="{StaticResource Primary}"
-                                    VerticalTextAlignment="Center" />
+                            Text="{Static local:Icons.Menu}"
+                            FontSize="30"
+                            FontFamily="icons"
+                            Margin="0,0,5,0"
+                            TextColor="{StaticResource Primary}"
+                            VerticalTextAlignment="Center" />
 
 
                         <Label
-                    Text="Filters"
-                    FontSize="15"
-                    VerticalTextAlignment="Center" />
+                            Text="Filters"
+                            FontSize="15"
+                            VerticalTextAlignment="Center" />
                     </HorizontalStackLayout>
                 </Border>
             </HorizontalStackLayout>
@@ -61,7 +62,7 @@
 
 
 
-        <CarouselView 
+        <CarouselView
             ItemsSource="{Binding Articles}"
             HeightRequest="200"
             PeekAreaInsets="1">
@@ -69,30 +70,28 @@
                 <DataTemplate>
                     <Grid>
                         <Border
-        
                             Margin="10"
-                          
-                            StrokeShape="RoundRectangle 10 10 10 10"
-               
-                            >
-                            <Grid RowDefinitions=".7*,.1*" >
-                                <Image Aspect="AspectFill" 
-                                       HeightRequest="190"
-                                
-                                       Source="{Binding ImgSource}" 
-                                       Grid.RowSpan="2" />
-                                <Border Grid.Row="1"
-                                        Opacity=".8"
-                                        VerticalOptions="End"
-                                        HeightRequest="60"
-                                        StrokeShape="RoundRectangle 0 0 10 10">
+                            StrokeShape="RoundRectangle 10 10 10 10">
+                            <Grid
+                                RowDefinitions=".7*,.1*">
+                                <Image
+                                    Aspect="AspectFill"
+                                    HeightRequest="190"
+                                    Source="{Binding ImgSource}"
+                                    Grid.RowSpan="2" />
+                                <Border
+                                    Grid.Row="1"
+                                    Opacity=".9"
+                                    BackgroundColor="White"
+                                    VerticalOptions="End"
+
+                                    Margin="-2,0,-1,-2"
+                                    HeightRequest="60">
                                     <Label
-                                      
                                         VerticalOptions="Center"
                                         BackgroundColor="White"
                                         Padding="10,0,0,0"
-                                        Text="{Binding Title}"
-                                        ></Label>
+                                        Text="{Binding Title}"></Label>
 
                                 </Border>
 
@@ -102,8 +101,7 @@
                                 <Shadow
                                     Brush="Black"
                                     Radius="5"
-                                    Opacity=".3"
-                                    ></Shadow>
+                                    Opacity=".3"></Shadow>
                             </Border.Shadow>
                         </Border>
                     </Grid>
@@ -112,36 +110,104 @@
         </CarouselView>
 
 
-        <Grid x:Name="weeklyGoal">
+        <Grid
+            x:Name="weeklyGoal">
             <Label
-                        Text="Your Weekly Goal"
-                        FontFamily="OpenSansSemibold"
-                        FontSize="25"
-                        HorizontalOptions="Start" />
+                Text="Your Weekly Goal"
+                FontFamily="OpenSansSemibold"
+                FontSize="25"
+                HorizontalOptions="Start" />
             <Label
-                        HorizontalOptions="End"
-                        VerticalOptions="Center"
-                        Text="Change goal -->"
-                        FontSize="12"
-                        TextColor="{StaticResource Primary}"/>
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Text="Change goal -->"
+                FontSize="12"
+                TextColor="{StaticResource Primary}" />
         </Grid>
 
-          <Border
-   
-                    Margin="10"
-           
-                    StrokeShape="RoundRectangle 10 10 10 10"
-                   >
-                    <VerticalStackLayout Padding="8">
-                        <Label
-                            Text="7-10 stories/week"
-                            FontFamily="OpenSansSemibold"
-                            Margin="0,0,0,10"/>
-                        <local:ProgressDash Value="4" />
-                    </VerticalStackLayout>
+        <Border
+            Margin="10"
+            StrokeShape="RoundRectangle 10 10 10 10">
+            <VerticalStackLayout
+                Padding="8">
+                <Label
+                    Text="7-10 stories/week"
+                    FontFamily="OpenSansSemibold"
+                    Margin="0,0,0,10" />
+                <local:ProgressDash
+                    Value="4" />
+            </VerticalStackLayout>
 
-           
-                </Border>
+
+        </Border>
+
+
+
+        <Grid
+            x:Name="readingChallenges">
+            <Label
+                Text="Reading challenges"
+                FontFamily="OpenSansSemibold"
+                FontSize="25"
+                HorizontalOptions="Start" />
+            <Label
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Text="4 challengesl -->"
+                FontSize="12"
+                TextColor="{StaticResource Primary}" />
+        </Grid>
+
+
+
+        <CarouselView
+            ItemsSource="{Binding Articles2}"
+        HeightRequest="200"
+            PeekAreaInsets="2">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border
+                            Margin="10"
+                            StrokeShape="RoundRectangle 10 10 10 10">
+                            <Grid
+                                RowDefinitions=".7*,.1*">
+                                <Image
+                                    Aspect="AspectFill"
+                                    HeightRequest="190"
+                                    Source="{Binding ImgSource}"
+                                    Grid.RowSpan="2" />
+                                <Border
+                                    Grid.Row="1"
+                                    Opacity=".9"
+                                    BackgroundColor="White"
+                                    VerticalOptions="End"
+
+                                    Margin="-2,0,-1,-2"
+                                    HeightRequest="60">
+                                    <Label
+                                        VerticalOptions="Center"
+                                        Margin="10,0,0,0"
+                                        Text="{Binding Title}"></Label>
+
+                                </Border>
+
+                            </Grid>
+
+                            <Border.Shadow>
+                                <Shadow
+                                    Brush="Black"
+                                    Radius="5"
+                                    Opacity=".3"></Shadow>
+                            </Border.Shadow>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+
+
     </VerticalStackLayout>
 </ContentView>
 
