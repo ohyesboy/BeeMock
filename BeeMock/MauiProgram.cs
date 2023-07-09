@@ -22,7 +22,6 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainPageModel>();
 
-
-		return builder.Build();
+        return builder.Build();
 	}
 }

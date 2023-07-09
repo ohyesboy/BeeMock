@@ -8,9 +8,8 @@
 
     <Grid RowDefinitions="*,100">
         <ScrollView x:Name="view">
-            <VerticalStackLayout>
-                 <ContentView Content="{Binding CurrentView}" />
-            </VerticalStackLayout>
+
+            <ContentView Content="{Binding CurrentView}" />
 
         </ScrollView>
 

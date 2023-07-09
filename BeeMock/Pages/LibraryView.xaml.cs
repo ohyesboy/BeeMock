@@ -7,5 +7,6 @@ public partial class LibraryView : ContentView
 	{
 		Model = model;
 		InitializeComponent();
+		this.BindingContext = Model;
 	}
 }

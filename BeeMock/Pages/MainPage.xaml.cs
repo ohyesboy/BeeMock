@@ -22,8 +22,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
     private string _Title;
     public string Title { get { return _Title; } set { if (_Title == value) return; _Title = value; OnPropertyChanged(); } }
-    public ObservableCollection<Article> Articles { get; set; }
-    public ObservableCollection<Article> Articles2 { get; set; }
+  
     public MainPage(MainPageModel model)
     {
         Model = model;
@@ -34,18 +33,21 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
         Model.CurrentView = Model.Buttons[0].View;
         InitializeComponent();
         Title = "Titles";
-        
-        Articles = new ObservableCollection<Article>()
-        {
-            new Article(){Title="Summer Frenzy", ImgSource="sea.png"},
-            new Article(){Title="Tokyo cold", ImgSource="cold.png"},
-        };
 
-        Articles2 = new ObservableCollection<Article>()
+
+        Model.Articles.Add(new Article() { Title = "Summer Frenzy", ImgSource = "sea.png" });
+        Model.Articles.Add(new Article() { Title = "Tokyo cold", ImgSource = "cold.png" });
+
+        Model.Articles2.Add(new Article() { Title = "Explorer the US (Advanced)", ImgSource = "small1.png" });
+       Model.Articles2.Add(new Article() { Title = "Explore Mexico (Beginner)", ImgSource = "small2.png" });
+
+        for (var i = 0; i < 10; i++)
         {
-            new Article(){Title="Explorer the US (Advanced)", ImgSource="small1.png"},
-            new Article(){Title="Explore Mexico (Beginner)", ImgSource="small2.png"},
-        };
+
+            Model.Progress.Add(new ProgressDot() { Done = i < 4 });
+        }
+
+
         this.BindingContext = Model;
 
     }
@@ -53,6 +55,8 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
 public class MainPageModel: INotifyPropertyChanged
 {
+    public ObservableCollection<ProgressDot> Progress { get; set; } = new ObservableCollection<ProgressDot>();
+
 
     ObservableCollection<IconButtonModel> _Buttons;
     public ObservableCollection<IconButtonModel> Buttons { get => _Buttons; set { if (_Buttons == value) return; _Buttons = value; OnPropertyChanged(); } }
@@ -60,6 +64,10 @@ public class MainPageModel: INotifyPropertyChanged
 
     ContentView _CurrentView;
     public ContentView CurrentView { get => _CurrentView; set { if (_CurrentView == value) return; _CurrentView = value; OnPropertyChanged(); } }
+
+
+    public ObservableCollection<Article> Articles { get; set; } = new ObservableCollection<Article>();
+    public ObservableCollection<Article> Articles2 { get; set; } = new ObservableCollection<Article>();
 
 
     public event PropertyChangedEventHandler PropertyChanged;

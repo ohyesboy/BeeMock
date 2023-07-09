@@ -1,42 +1,33 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<HorizontalStackLayout  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BeeMock.ProgressDash">
-    <HorizontalStackLayout>
-        <CollectionView ItemsSource="{Binding DoneValues}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <RoundRectangle
-                                HeightRequest="10" 
-                                WidthRequest="25"
-                                CornerRadius="10"
-                                Margin="0,0,8,0"
-                                Fill="#D93F7B"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+             x:Class="BeeMock.ProgressDash"  BindableLayout.ItemsSource="{Binding Progress}">
 
-        <CollectionView ItemsSource="{Binding UndoneValues}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
+    <HorizontalStackLayout.Resources>
+        <ResourceDictionary>
+            <Style TargetType="RoundRectangle">
+                <Style.Triggers>
+                    <DataTrigger  TargetType="RoundRectangle" Binding="{Binding Done}" Value="False">
+                        <Setter Property="Stroke" Value="#D93F7B" />
+                        <Setter Property="StrokeThickness" Value="2" />
+                        <Setter Property="Fill" Value="White" />
+                    </DataTrigger>
+                </Style.Triggers>
 
-                    <RoundRectangle
-                                HeightRequest="10" 
-                                WidthRequest="25"
-                                CornerRadius="10"
-                                Margin="0,0,10,0"
-                                Stroke="#D93F7B"
-                                StrokeThickness="2"
-                                />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
- 
-    </HorizontalStackLayout>
-</ContentView>
+            </Style>
+        </ResourceDictionary>
+
+    </HorizontalStackLayout.Resources>
+
+
+    <BindableLayout.ItemTemplate>
+        <DataTemplate>
+            <RoundRectangle
+                HeightRequest="10" 
+                WidthRequest="25"
+                CornerRadius="10"
+                Margin="0,0,8,0"
+                Fill="#D93F7B"/>
+        </DataTemplate>
+    </BindableLayout.ItemTemplate>
+</HorizontalStackLayout>
