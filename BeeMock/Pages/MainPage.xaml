@@ -1,19 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:BeeMock"
-            
-             x:Class="BeeMock.MainPage">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BeeMock"
+
+    x:Class="BeeMock.MainPage">
 
 
-    <Grid RowDefinitions="*,100">
-        <ScrollView x:Name="view">
+    <Grid x:Name="grid"
+        RowDefinitions="*,Auto">
 
-            <ContentView Content="{Binding CurrentView}" />
+
+        
+        <ScrollView VerticalScrollBarVisibility="Never" >
+           <ContentView Content="{Binding CurrentView}" />
 
         </ScrollView>
 
-        <local:IconButton Grid.Row="1" x:Name="tabs" ></local:IconButton>
+
+        <local:IconButton
+            Margin="0,-50,0,0"
+            Grid.Row="1"
+            Background="White"
+            x:Name="tabs"
+            VerticalOptions="Center"
+            HeightRequest="70"
+            ></local:IconButton>
+
 
     </Grid>
 </ContentPage>

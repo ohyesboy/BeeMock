@@ -11,6 +11,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
     public MainPage(MainPageModel model)
     {
+        var screenHeight2 = Microsoft.Maui.Devices.DeviceDisplay.MainDisplayInfo.Height;
         Model = model;
         Model.Buttons.Add(new IconButtonModel { Icon = Icons.Home, Selected = true, Text = "Library", View = new LibraryView(Model) });
         Model.Buttons.Add(new IconButtonModel { Icon = Icons.Doc_Text, Text = "Vocabs", View = new NewContent2() });
@@ -29,9 +30,13 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
         Model.Value2 = 8;
 
+
         InitializeComponent();
         this.BindingContext = Model;
 
+        var screenHeight = Microsoft.Maui.Devices.DeviceDisplay.MainDisplayInfo.Height;
+        //var bottomHeight = grid.RowDefinitions[1].Height.Value;
+        //grid.RowDefinitions[0].Height = screenHeight - bottomHeight;
     }
 
   

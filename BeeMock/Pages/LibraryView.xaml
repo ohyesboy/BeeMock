@@ -116,6 +116,13 @@
 
 
         <local:ArticleSlideControl Articles="{Binding Articles2}" />
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
+        <local:ArticleSlideControl Articles="{Binding Articles2}" />
 
 
 
