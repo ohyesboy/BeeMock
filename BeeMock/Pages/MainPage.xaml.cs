@@ -27,13 +27,6 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
         Model.Articles2.Add(new Article() { Title = "Explore Mexico (Beginner)", ImgSource = "small2.png" });
         Model.Articles2.Add(new Article() { Title = "Explore Europe (Beginner)", ImgSource = "small2.png" });
 
-        for (var i = 0; i < 10; i++)
-        {
-
-            Model.Progress.Add(new ProgressDot() { Done = i < 4 });
-        }
-
-
         Model.Value2 = 8;
 
         InitializeComponent();

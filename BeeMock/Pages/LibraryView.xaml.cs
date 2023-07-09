@@ -9,4 +9,10 @@ public partial class LibraryView : ContentView
 		InitializeComponent();
 		this.BindingContext = Model;
 	}
+
+    void Button_Clicked(System.Object sender, System.EventArgs e)
+    {
+        Model.Value2 = 3;
+    }
+
 }

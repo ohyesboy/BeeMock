@@ -1,10 +1,13 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BeeMock;
 
-public partial class ProgressDash : HorizontalStackLayout, INotifyPropertyChanged
+public partial class ProgressDash : HorizontalStackLayout
 {
+
+    public ObservableCollection<ProgressDot> Progress { get; set; } = new ObservableCollection<ProgressDot>();
 
 
     public static readonly BindableProperty ValueProperty =
@@ -16,11 +19,26 @@ public partial class ProgressDash : HorizontalStackLayout, INotifyPropertyChange
     public ProgressDash()
     {
         InitializeComponent();
-        var model = ServiceHelper.GetService<MainPageModel>();
-        this.BindingContext = model;
+        //this.BindingContext = Model;
+    }
+
+    protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        base.OnPropertyChanged(propertyName);
+        if(propertyName == nameof(Value)) {
+
+            Progress.Clear();
+            for (var i = 0; i < 10; i++)
+            {
+
+                Progress.Add(new ProgressDot() { Done = i < Value });
+            }
+
+        }
     }
 
 }
+
 
 public class ProgressDot
 {

@@ -6,9 +6,7 @@ namespace BeeMock;
 
 public class MainPageModel : INotifyPropertyChanged
 {
-    public ObservableCollection<ProgressDot> Progress { get; set; } = new ObservableCollection<ProgressDot>();
-
-
+    
     string _Title;
     public string Title { get => _Title; set { if (_Title == value) return; _Title = value; OnPropertyChanged(); } }
 
