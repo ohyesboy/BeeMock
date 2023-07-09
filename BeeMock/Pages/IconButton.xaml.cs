@@ -15,6 +15,9 @@ public partial class IconButton : ContentView
 		mainModel = ServiceHelper.GetService<MainPageModel>();
         //this.BindingContext = mainModel;
 		this.Buttons = mainModel.Buttons;
+#if __IOS__
+		this.stack.Margin = new Thickness(0, 10, 0, 0);
+#endif
     }
 
     void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)

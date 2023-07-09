@@ -17,8 +17,8 @@
 
     </ContentView.Resources>
 
-    <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Buttons}" >
-
+    <StackLayout x:Name="stack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Buttons}" >
+  
         <BindableLayout.ItemTemplate>
             <DataTemplate>
                 <VerticalStackLayout

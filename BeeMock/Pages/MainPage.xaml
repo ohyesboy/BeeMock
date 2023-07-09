@@ -19,12 +19,13 @@
 
 
         <local:IconButton
-            Margin="0,-50,0,0"
+            Margin="0,-60,0,0"
+
             Grid.Row="1"
             Background="White"
             x:Name="tabs"
             VerticalOptions="Center"
-            HeightRequest="70"
+            HeightRequest="59"
             ></local:IconButton>
 
 

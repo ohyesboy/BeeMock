@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BeeMock.NewContent2">
     <VerticalStackLayout>
-        <Label 
+        <Label
+            x:Name="lab"
             Text="Welcome Content2!"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"/>
+        <Label Text="aa" />
     </VerticalStackLayout>
 </ContentView>
 
