@@ -3,6 +3,14 @@
 public static class AppFileHelper
 {
     static string fileDir = Path.Combine(FileSystem.Current.CacheDirectory);
+
+    public static void DeleteFile(string fileName)
+    {
+        var filePath = Path.Combine(fileDir, fileName);
+        File.Delete(filePath);
+    }
+
+
     public static string ReadAllText(string fileName, ref DateTime lastWrite)
     {
         var filePath = Path.Combine(fileDir, fileName);
@@ -20,6 +28,12 @@ public static class AppFileHelper
 
         File.WriteAllText(filePath, content);
 
+    }
+
+    public static DateTime GetFileLastWriteTime(string fileName)
+    {
+        var filePath = Path.Combine(fileDir, fileName);
+        return new FileInfo(filePath).LastWriteTime;
     }
 }
 
