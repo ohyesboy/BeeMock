@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Text;
+using CommunityToolkit.Maui.Storage;
 
 namespace BeeMock;
 
@@ -13,6 +15,7 @@ public class HttpHelper {
 
     public async Task<string> GetContentAsync(string partialUrl)
     {
+
         Uri uri = new Uri(baseUri, partialUrl);
         try
         {
@@ -29,6 +32,36 @@ public class HttpHelper {
         {
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
 
+        }
+        return null;
+    }
+
+
+    public async Task<string> DownloadFileAsync(string partialUrl, bool overwriteExisting = false)
+    {
+        Uri uri = new Uri(baseUri, partialUrl);
+        try
+        {
+            HttpResponseMessage response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                //save stream
+                var fileName = partialUrl;
+                var filePath = Path.Combine(FileSystem.Current.CacheDirectory, fileName);
+                if (File.Exists(filePath) && !overwriteExisting)
+                    return filePath;
+                using (var fileStream = File.Create(filePath))
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.CopyTo(fileStream);
+                }
+                return filePath;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
         }
         return null;
     }

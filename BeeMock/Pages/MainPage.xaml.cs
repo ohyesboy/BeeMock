@@ -22,7 +22,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
         Model.Buttons.Add(new IconButtonModel { Icon = Icons.Sliders, Text = "More", View = new LibraryView(Model) });
         Model.CurrentView = Model.Buttons[0].View;
         Model.Title = "test";
-        Model.Articles = AppCachedObjectHelper.GetCachedObject<ObservableCollection<Article>>("bee/data.json");
+        Model.Articles = AppCachedObjectHelper.GetCachedObject<ObservableCollection<Article>>("data.json");
 
         Model.Articles2.Add(new Article() { Title = "Explorer the US (Advanced)", ImgSource = "small1.png" });
         Model.Articles2.Add(new Article() { Title = "Explorer China (Advanced)", ImgSource = "small1.png" });
@@ -46,9 +46,19 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
     public async Task UpdateData()
     {
-        var items =  await AppCachedObjectHelper.GetFreshObjectAndCache<ObservableCollection<Article>>("bee/data.json",0);
+        var items =  await AppCachedObjectHelper.GetFreshObjectAndCache<ObservableCollection<Article>>("data.json",0);
         if (items != null)
+        {
             Model.Articles = items;
+            foreach(var art in items)
+            {
+                var http = ServiceHelper.GetService<HttpHelper>();
+                var filePath = await http.DownloadFileAsync(art.ImgSource);
+
+                //download pics
+            }
+        }
+            
 
     }
 

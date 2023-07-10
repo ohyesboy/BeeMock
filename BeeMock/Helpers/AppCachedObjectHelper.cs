@@ -20,13 +20,13 @@ public static class AppCachedObjectHelper
 
     public async static Task<T> GetFreshObjectAndCache<T>(string fileName, double cacheExpireMinutes = 10)
     {
-        await Task.Delay(3000);
         var lastWrite = AppFileHelper.GetFileLastWriteTime(fileName);
         var cachedTime = (DateTime.Now - lastWrite).TotalMinutes;
         if (cachedTime > cacheExpireMinutes)
         {
             var http = ServiceHelper.GetService<HttpHelper>();
             var json = await http.GetContentAsync(fileName);
+
             if (json != null)
             {
                 var items = JsonSerializer.Deserialize<T>(json);
@@ -38,5 +38,8 @@ public static class AppCachedObjectHelper
         }
         return default(T);
     }
+
+
+
 }
 
