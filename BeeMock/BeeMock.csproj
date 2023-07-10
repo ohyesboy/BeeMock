@@ -59,6 +59,7 @@
 	  <None Remove="Resources\Images\small1.png" />
 	  <None Remove="Resources\Images\small2.png" />
 	  <None Remove="Models\" />
+	  <None Remove="Helpers\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -73,6 +74,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Models\" />
+	  <Folder Include="Helpers\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -25,6 +25,8 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainPageModel>();
 		builder.Services.AddSingleton<IFileSaver>(FileSaver.Default);
+		builder.Services.AddSingleton<HttpHelper>(new HttpHelper("https://krwjhbpm.use2.devtunnels.ms:8000"));
+
         return builder.Build();
 	}
 }
