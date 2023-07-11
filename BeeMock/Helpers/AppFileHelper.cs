@@ -2,7 +2,7 @@
 
 public static class AppFileHelper
 {
-    static string fileDir = FileSystem.Current.CacheDirectory;
+    static string fileDir = FileSystem.Current.AppDataDirectory;
 
     public static void DeleteFile(string fileName)
     {
