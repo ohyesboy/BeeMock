@@ -11,6 +11,10 @@
         <CarouselView.ItemTemplate>
             <DataTemplate>
                 <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+
+                    </Grid.GestureRecognizers>
                     <Border
                         Margin="10"
                         StrokeShape="RoundRectangle 10 10 10 10">

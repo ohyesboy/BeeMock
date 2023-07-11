@@ -28,6 +28,8 @@ public static class MauiProgram
 		var httpClient = new HttpHelper("https://zhan.blob.core.windows.net/");
        
         builder.Services.AddSingleton<HttpHelper>(httpClient);
+		builder.Services.AddTransient<ArticlePage>();
+		builder.Services.AddTransient<ArticlePageModel>();
 
         return builder.Build();
 	}

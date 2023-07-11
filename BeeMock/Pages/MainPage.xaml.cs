@@ -35,7 +35,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
 
     private double PicCacheExpireMinutes = 1000;
-    private double DataCacheExpireMinutes = 1;
+    private double DataCacheExpireMinutes = 5;
     public async Task UpdateData()
     {
         //clear cache if expired

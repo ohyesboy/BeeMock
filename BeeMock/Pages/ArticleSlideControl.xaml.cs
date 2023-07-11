@@ -22,4 +22,12 @@ public partial class ArticleSlideControl : ContentView , INotifyPropertyChanged
 
     }
 
+    async void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(ArticlePage),
+            new Dictionary<string, object> {
+                {"Id",123 }
+            });
+
+    }
 }

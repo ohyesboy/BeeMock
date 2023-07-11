@@ -20,8 +20,7 @@ public partial class LibraryView : ContentView
     [RelayCommand]
     async Task UpdateValue()
     {
-
-
+        
        
     }
 }
