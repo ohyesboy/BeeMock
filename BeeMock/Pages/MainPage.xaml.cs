@@ -51,21 +51,6 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
         {
             Model.Articles = items;
         }
-
-        foreach(var art in Model.Articles) {
-            var http = ServiceHelper.GetService<HttpHelper>();
-
-            var fileName = art.ImgSource;
-            var filePath = Path.Combine(FileSystem.Current.CacheDirectory, fileName);
-            if (AppFileHelper.HasFileCacheExpired(fileName, 1))
-            {
-                var file = await http.DownloadFileAsync(fileName, true);
-            }
-
-            //refresh
-            art.ImgSource = null;
-            art.ImgSource = fileName;
-        }
     }
 
 
