@@ -42,10 +42,9 @@
 		<!-- Splash Screen -->
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-
-		<!-- Custom Fonts -->
+		<MauiImage Include="Resources\Images\*svg" />
+		<MauiImage Include="Resources\Images\*png" />
+		<MauiImage Include="Resources\Images\*jpg" />
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
@@ -53,11 +52,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\cold.png" />
-	  <None Remove="Resources\Images\Logo.PNG" />
-	  <None Remove="Resources\Images\sea.PNG" />
-	  <None Remove="Resources\Images\small1.png" />
-	  <None Remove="Resources\Images\small2.png" />
 	  <None Remove="Models\" />
 	  <None Remove="Helpers\" />
 	</ItemGroup>

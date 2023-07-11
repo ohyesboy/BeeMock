@@ -50,15 +50,8 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
         if (items != null)
         {
             Model.Articles = items;
-            foreach(var art in items)
-            {
-                var http = ServiceHelper.GetService<HttpHelper>();
-                var filePath = await http.DownloadFileAsync(art.ImgSource);
-
-                //download pics
-            }
         }
-            
+           
 
     }
 
