@@ -12,7 +12,9 @@
             <DataTemplate>
                 <Grid>
                     <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        <TapGestureRecognizer
+                            Command="{Binding Path=TapCommand, Source={Reference this}}"
+                            CommandParameter="123"/>
 
                     </Grid.GestureRecognizers>
                     <Border
