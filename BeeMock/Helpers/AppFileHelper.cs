@@ -3,7 +3,10 @@
 public static class AppFileHelper
 {
     public static string AppFileDir = FileSystem.Current.CacheDirectory;
-
+    public static void ClearCaches()
+    {
+        Directory.Delete(AppFileDir, true);
+    }
     public static void DeleteFile(string fileName)
     {
         var filePath = Path.Combine(AppFileDir, fileName);

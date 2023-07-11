@@ -15,7 +15,7 @@ public class ImageCacheHelper {
 
             var fileName = type.GetProperty(e.PropertyName).GetValue(obj) as string ;
             var filePath = Path.Combine(AppFileHelper.AppFileDir, fileName);
-            if (AppFileHelper.HasFileCacheExpired(fileName, .1))
+            if (!File.Exists(filePath))
             {
                 Debug.WriteLine("DOWNLOADING -> "+fileName);
 

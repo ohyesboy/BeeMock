@@ -13,7 +13,11 @@ public partial class Article: ObservableObject
     {
         get
         {
-            return Path.Combine(AppFileHelper.AppFileDir, ImgSource);
+            var file = Path.Combine(AppFileHelper.AppFileDir, ImgSource);
+            if(File.Exists(file))
+                return file;
+            return
+                null;
         }
     }
 
