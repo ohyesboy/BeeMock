@@ -54,6 +54,7 @@
 	<ItemGroup>
 	  <None Remove="Models\" />
 	  <None Remove="Helpers\" />
+	  <None Remove="Resources\Raw\sound1.wav" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -64,6 +65,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Plugin.Maui.Audio" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -80,4 +82,7 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <BundleResource Include="Resources\Raw\sound1.wav" />
+	</ItemGroup>
 </Project>

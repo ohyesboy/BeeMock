@@ -5,6 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using Plugin.Maui.Audio;
+
 namespace BeeMock;
 
 public partial class MainPage : ContentPage, INotifyPropertyChanged
@@ -36,6 +38,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 
     private double PicCacheExpireMinutes = 1000;
     private double DataCacheExpireMinutes = 5;
+
     public async Task UpdateData()
     {
         //clear cache if expired

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
+using Plugin.Maui.Audio;
 
 namespace BeeMock;
 
@@ -28,6 +29,8 @@ public static class MauiProgram
 		var httpClient = new HttpHelper("https://zhan.blob.core.windows.net/");
        
         builder.Services.AddSingleton<HttpHelper>(httpClient);
+        builder.Services.AddSingleton(AudioManager.Current);
+
 		builder.Services.AddTransient<ArticlePage>();
 		builder.Services.AddTransient<ArticlePageModel>();
 
