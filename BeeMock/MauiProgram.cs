@@ -25,7 +25,9 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainPageModel>();
 		builder.Services.AddSingleton<IFileSaver>(FileSaver.Default);
-		builder.Services.AddSingleton<HttpHelper>(new HttpHelper("https://zhan.blob.core.windows.net/pics/"));
+		var httpClient = new HttpHelper("https://zhan.blob.core.windows.net/");
+       
+        builder.Services.AddSingleton<HttpHelper>(httpClient);
 
         return builder.Build();
 	}

@@ -18,7 +18,7 @@ public static class AppCachedObjectHelper
     }
 
 
-    public async static Task<T> GetFreshObjectAndCache<T>(string fileName, double cacheExpireMinutes = 10)
+    public async static Task<T> GetFreshObjectWhenExpired<T>(string fileName, double cacheExpireMinutes)
     {
         var lastWrite = AppFileHelper.GetFileLastWriteTime(fileName);
         var cachedTime = (DateTime.Now - lastWrite).TotalMinutes;

@@ -3,10 +3,14 @@
 public static class AppFileHelper
 {
     public static string AppFileDir = FileSystem.Current.CacheDirectory;
-    public static void ClearCaches()
+
+    public static void ClearCachedPic()
     {
-        Directory.Delete(AppFileDir, true);
+        var path = Path.Combine(AppFileDir, "pics");
+        if(Directory.Exists(path))
+            Directory.Delete(path, true);
     }
+
     public static void DeleteFile(string fileName)
     {
         var filePath = Path.Combine(AppFileDir, fileName);
@@ -26,8 +30,7 @@ public static class AppFileHelper
     public static void WriteAllText(string fileName, string content)
     {
         string filePath = Path.Combine(AppFileDir, fileName);
-        if (!Directory.Exists(AppFileDir))
-            Directory.CreateDirectory(AppFileDir);
+        new FileInfo(filePath).Directory.Create();
 
         File.WriteAllText(filePath, content);
 

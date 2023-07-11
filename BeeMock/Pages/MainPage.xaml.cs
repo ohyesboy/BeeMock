@@ -34,26 +34,29 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
     }
 
 
-    private double CacheExpireMinutes = 1;
+    private double PicCacheExpireMinutes = 1000;
+    private double DataCacheExpireMinutes = 1;
     public async Task UpdateData()
     {
         //clear cache if expired
-        var lastUpdate = Preferences.Get("lastUpdate", DateTime.MinValue);
-        if ((DateTime.Now - lastUpdate).TotalMinutes > CacheExpireMinutes)
+        var lastUpdatePics = Preferences.Get("lastUpdatePics", DateTime.MinValue);
+        if ((DateTime.Now - lastUpdatePics).TotalMinutes > PicCacheExpireMinutes)
         {
-            Preferences.Set("lastUpdate", DateTime.Now);
-            AppFileHelper.ClearCaches();
+            Preferences.Set("lastUpdatePics", DateTime.Now);
+            AppFileHelper.ClearCachedPic();
         }
 
 
         //load cache
-        Model.Articles = AppCachedObjectHelper.GetCachedObject<ObservableCollection<Article>>("data.json");
-        Model.Articles2.Add(new Article() { Title = "Explorer the US (Advanced)", ImgSource = "small1.png" });
+        Model.Articles = AppCachedObjectHelper.GetCachedObject<ObservableCollection<Article>>("pics/data.json");
+        Model.Articles2 = AppCachedObjectHelper.GetCachedObject<ObservableCollection<Article>>("pics/data2.json");
 
         //update
-        var items = await AppCachedObjectHelper.GetFreshObjectAndCache<ObservableCollection<Article>>("data.json", 0);
+        var items = await AppCachedObjectHelper.GetFreshObjectWhenExpired<ObservableCollection<Article>>("pics/data.json", DataCacheExpireMinutes);
         Model.Articles = items ?? Model.Articles;
 
+        var items2 = await AppCachedObjectHelper.GetFreshObjectWhenExpired<ObservableCollection<Article>>("pics/data2.json", DataCacheExpireMinutes);
+        Model.Articles2 = items2 ?? Model.Articles2;
     }
 
 
