@@ -55,6 +55,7 @@
 	  <None Remove="Models\" />
 	  <None Remove="Helpers\" />
 	  <None Remove="Resources\Raw\sound1.wav" />
+	  <None Remove="Resources\Raw\pumaatlarge.mp3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,5 +85,6 @@
 
 	<ItemGroup>
 	  <BundleResource Include="Resources\Raw\sound1.wav" />
+	  <BundleResource Include="Resources\Raw\pumaatlarge.mp3" />
 	</ItemGroup>
 </Project>

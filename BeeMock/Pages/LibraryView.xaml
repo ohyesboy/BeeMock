@@ -10,14 +10,28 @@
     <VerticalStackLayout>
         <Grid
             x:Name="MenuRow" >
-            <Button
+          <HorizontalStackLayout>
+                <Button
                 HorizontalOptions="Start"
-                Text="Premium"
+                Text="Play"
                 FontSize="10"
                 VerticalOptions="Center"
                 Command="{Binding Path=UpdateValueCommand, Source={Reference this}}"
                 Padding="10,0,10,0"
                 Margin="0" />
+
+               <Button
+                HorizontalOptions="Start"
+                Text="Pause/Continue"
+                FontSize="10"
+                VerticalOptions="Center"
+                Command="{Binding Path=PauseCommand, Source={Reference this}}"
+                Padding="10,0,10,0"
+                Margin="0" />
+
+          </HorizontalStackLayout>
+
+
             <HorizontalStackLayout
                 HorizontalOptions="End">
                 <Border

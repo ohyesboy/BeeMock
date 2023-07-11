@@ -14,16 +14,36 @@ public partial class LibraryView : ContentView
 		Model = model;
 		InitializeComponent();
 		this.BindingContext = Model;
-	}
-    HttpClient _client;
-    JsonSerializerOptions _serializerOptions;
+
+      
+    }
+    IAudioManager audios = ServiceHelper.GetService<IAudioManager>();
+
+    IAudioPlayer player;
 
     [RelayCommand]
     async Task UpdateValue()
     {
-        IAudioManager audios = ServiceHelper.GetService<IAudioManager>();
-        var player = audios.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("sound1.wav"));
+        if(player == null)
+        {
+            player = audios.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("pumaatlarge.mp3"));
+        }
         player.Play();
+        player.Seek(10);
+
+    }
+
+    [RelayCommand]
+    async Task Pause()
+    {
+        Debug.WriteLine($"--> IsPlaying = {player.IsPlaying}");
+        if(player.IsPlaying)
+        {
+            player.Pause();
+        }
+        else {
+            player.Play();
+        }
 
     }
 }
