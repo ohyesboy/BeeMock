@@ -30,5 +30,8 @@ public partial class MainPageModel : ObservableObject
         Buttons = new ObservableCollection<IconButtonModel>();
     }
 
+
+    [ObservableProperty]
+    ImageSource img;
 }
 

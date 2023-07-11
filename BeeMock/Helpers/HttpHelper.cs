@@ -37,8 +37,9 @@ public class HttpHelper {
     }
 
 
-    public async Task<string> DownloadFileAsync(string partialUrl, bool overwriteExisting = false)
+    public async Task<string> DownloadFileAsync(string fileName, bool overwriteExisting = false)
     {
+        string partialUrl = fileName;
         Uri uri = new Uri(baseUri, partialUrl);
         try
         {
@@ -47,10 +48,15 @@ public class HttpHelper {
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 //save stream
-                var fileName = partialUrl;
-                var filePath = Path.Combine(FileSystem.Current.CacheDirectory, fileName);
+    
+                var fileDir = FileSystem.Current.CacheDirectory;
+                var filePath = Path.Combine(fileDir, fileName);
+  
+             
                 if (File.Exists(filePath) && !overwriteExisting)
                     return filePath;
+
+                Directory.CreateDirectory(fileDir);
                 using (var fileStream = File.Create(filePath))
                 {
                     stream.Seek(0, SeekOrigin.Begin);

@@ -2,7 +2,7 @@
 
 public static class AppFileHelper
 {
-    static string fileDir = FileSystem.Current.AppDataDirectory;
+    static string fileDir = FileSystem.Current.CacheDirectory;
 
     public static void DeleteFile(string fileName)
     {
@@ -35,5 +35,12 @@ public static class AppFileHelper
         var filePath = Path.Combine(fileDir, fileName);
         return new FileInfo(filePath).LastWriteTime;
     }
+
+    public static bool HasFileCacheExpired(string fileName, double minutes)
+    {
+        var time = GetFileLastWriteTime(fileName);
+        return (DateTime.Now - time).TotalMinutes > minutes;
+    }
+    
 }
 

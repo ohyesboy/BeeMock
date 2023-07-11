@@ -19,14 +19,14 @@
                             <Image
                                 Aspect="AspectFill"
                                 HeightRequest="190"
-                                
+                                Source="{Binding ImgSourceUri}"
                                 Grid.RowSpan="2" >
-                                <!--Source="{Binding ImgSource}"-->
-                                <Image.Source>
+                                <!---->
+                                <!--<Image.Source>
                                     <UriImageSource
                                          Uri="{Binding ImgSourceUri}"
                                          CacheValidity="00:00:00:05" />
-                                </Image.Source>
+                                </Image.Source>-->
                             </Image>
                             <Border
                                 Grid.Row="1"

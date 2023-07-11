@@ -1,15 +1,23 @@
-﻿namespace BeeMock;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+namespace BeeMock;
 
-public class Article
+public partial class Article: ObservableObject
 {
     public string Title { get; set; }
-    public string ImgSource { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ImgSourceUri))]
+    string imgSource;
+
     public string ImgSourceUri
     {
         get
         {
-            return "https://zhan.blob.core.windows.net/pics/" + ImgSource;
+            return Path.Combine(FileSystem.Current.CacheDirectory, ImgSource);
         }
     }
+
+
+
 }
 
