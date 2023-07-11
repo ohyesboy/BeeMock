@@ -6,16 +6,16 @@ namespace BeeMock;
 
 public class HttpHelper {
     private readonly Uri baseUri;
-    private HttpClient _client;
+   
     public HttpHelper(string baseUri)
     {
-        this._client = new HttpClient();
+        
         this.baseUri = new Uri(baseUri);
     }
 
     public async Task<string> GetContentAsync(string partialUrl)
     {
-
+        var _client = new HttpClient();
         Uri uri = new Uri(baseUri, partialUrl);
         try
         {
@@ -39,8 +39,9 @@ public class HttpHelper {
 
     public async Task<string> DownloadFileAsync(string fileName, bool overwriteExisting = false)
     {
+        var _client = new HttpClient();
         string partialUrl = fileName;
-        Uri uri = new Uri(baseUri, partialUrl);
+        Uri uri = new Uri(baseUri, partialUrl+"?t="+DateTime.Now.Ticks);
         try
         {
             HttpResponseMessage response = await _client.GetAsync(uri);
@@ -48,8 +49,8 @@ public class HttpHelper {
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 //save stream
-    
-                var fileDir = FileSystem.Current.CacheDirectory;
+
+                var fileDir =AppFileHelper.AppFileDir;
                 var filePath = Path.Combine(fileDir, fileName);
   
              

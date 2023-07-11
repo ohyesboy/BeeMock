@@ -2,18 +2,18 @@
 
 public static class AppFileHelper
 {
-    static string fileDir = FileSystem.Current.CacheDirectory;
+    public static string AppFileDir = FileSystem.Current.CacheDirectory;
 
     public static void DeleteFile(string fileName)
     {
-        var filePath = Path.Combine(fileDir, fileName);
+        var filePath = Path.Combine(AppFileDir, fileName);
         File.Delete(filePath);
     }
 
 
     public static string ReadAllText(string fileName, ref DateTime lastWrite)
     {
-        var filePath = Path.Combine(fileDir, fileName);
+        var filePath = Path.Combine(AppFileDir, fileName);
         if (File.Exists(filePath) == false)
             return null;
         lastWrite = new FileInfo(filePath).LastWriteTime;
@@ -22,9 +22,9 @@ public static class AppFileHelper
 
     public static void WriteAllText(string fileName, string content)
     {
-        string filePath = Path.Combine(fileDir, fileName);
-        if (!Directory.Exists(fileDir))
-            Directory.CreateDirectory(fileDir);
+        string filePath = Path.Combine(AppFileDir, fileName);
+        if (!Directory.Exists(AppFileDir))
+            Directory.CreateDirectory(AppFileDir);
 
         File.WriteAllText(filePath, content);
 
@@ -32,7 +32,7 @@ public static class AppFileHelper
 
     public static DateTime GetFileLastWriteTime(string fileName)
     {
-        var filePath = Path.Combine(fileDir, fileName);
+        var filePath = Path.Combine(AppFileDir, fileName);
         return new FileInfo(filePath).LastWriteTime;
     }
 

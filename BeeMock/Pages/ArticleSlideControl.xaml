@@ -19,7 +19,7 @@
                             <Image
                                 Aspect="AspectFill"
                                 HeightRequest="190"
-                                Source="{Binding ImgSourceUri}"
+                                Source="{Binding ImgSourceCache}"
                                 Grid.RowSpan="2" >
                                 <!---->
                                 <!--<Image.Source>

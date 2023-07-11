@@ -7,34 +7,20 @@ public partial class Article: ObservableObject
     public string Title { get; set; }
 
     [ObservableProperty]
-    //[NotifyPropertyChangedFor(nameof(ImgSourceUri))]
     string imgSource;
 
-    public string ImgSourceUri
+    public string ImgSourceCache
     {
         get
         {
-            return Path.Combine(FileSystem.Current.CacheDirectory, ImgSource);
+            return Path.Combine(AppFileHelper.AppFileDir, ImgSource);
         }
     }
 
+
     protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
     {
-
-        if(e.PropertyName == "ImgSource")
-        {
-            var http = ServiceHelper.GetService<HttpHelper>();
-
-
-            var fileName = ImgSource;
-            var filePath = Path.Combine(FileSystem.Current.CacheDirectory, fileName);
-            if (AppFileHelper.HasFileCacheExpired(fileName, .1))
-            {
-                var file = await http.DownloadFileAsync(fileName, true);
-                OnPropertyChanged(nameof(ImgSourceUri));
-            }
-            
-        }
+        await ImageCacheHelper.OnPropertyChanged(this, e);
         base.OnPropertyChanged(e);
     }
 
