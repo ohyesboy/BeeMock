@@ -17,33 +17,17 @@ public partial class LibraryView : ContentView
 
       
     }
-    IAudioManager audios = ServiceHelper.GetService<IAudioManager>();
-
-    IAudioPlayer player;
 
     [RelayCommand]
     async Task UpdateValue()
     {
-        if(player == null)
-        {
-            player = audios.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("pumaatlarge.mp3"));
-        }
-        player.Play();
-        player.Seek(10);
+
 
     }
 
     [RelayCommand]
     async Task Pause()
     {
-        Debug.WriteLine($"--> IsPlaying = {player.IsPlaying}");
-        if(player.IsPlaying)
-        {
-            player.Pause();
-        }
-        else {
-            player.Play();
-        }
 
     }
 }

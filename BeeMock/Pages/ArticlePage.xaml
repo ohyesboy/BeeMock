@@ -7,14 +7,61 @@
              Title="ArticlePage"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <Label Text="Id="></Label>
-        <Label Text="{Binding Id}"></Label>
-              <Label Text="Test="></Label>
-        <Label Text="{Binding Test}"></Label>
-        <Label 
-            Text="Welcome to .NET Article!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="go back" Clicked="Button_Clicked" />
+        <HorizontalStackLayout>
+            <Button Text="go back" Clicked="Button_Clicked" />
+            <Button Text="Play" Clicked="Play_Clicked" />
+
+        </HorizontalStackLayout>
+
+         <Label Text="{Binding ElapsedTime,StringFormat='{0:hh\\:mm\\:ss\\.ff}'}" FontSize="35" HorizontalOptions="Center" />
+
+        <ScrollView>
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Segments}" x:Name="linesPanel">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+
+                </VerticalStackLayout.GestureRecognizers>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout x:DataType="local:ScriptSegment">
+                            <HorizontalStackLayout.Style>
+                                <Style TargetType="HorizontalStackLayout" >
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="HorizontalStackLayout" Binding="{Binding IsCurrent}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="LightBlue"/>
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+                            </HorizontalStackLayout.Style>
+                            <Label Text="{Binding TimeStamp , StringFormat='{0:0.00}'}" WidthRequest="60" />
+                            <Label Text="{Binding Text}" TextColor="Gray">
+                                <Label.Style>
+                                    <Style TargetType="Label" >
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsCurrent}" Value="True">
+
+                                                <Setter Property="FontSize" Value="25"/>
+                                                <Setter Property="TextColor" Value="Black"/>
+
+                                            </DataTrigger>
+
+                                        </Style.Triggers>
+
+                                    </Style>
+
+                                </Label.Style>
+                            </Label>
+
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+
+                </BindableLayout.ItemTemplate>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>
