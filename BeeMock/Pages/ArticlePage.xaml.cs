@@ -14,17 +14,13 @@ public partial class ArticlePage : ContentPage
     IAudioPlayer player;
 
     private System.Timers.Timer aTimer;
-    private DateTime startTime;
-
 
     public ArticlePage(ArticlePageModel model)
 	{
 		InitializeComponent();
         this.BindingContext = model;
         this.model = model;
-
-        //
-
+        model.ButtonText = "Play";
     }
 
     protected async override void OnAppearing()
@@ -46,22 +42,26 @@ public partial class ArticlePage : ContentPage
 
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        Stop();
+    }
+
     private void SetTimer()
     {
         // Create a timer with a two second interval.
         aTimer = new System.Timers.Timer(0.2);
         // Hook up the Elapsed event for the timer. 
         aTimer.Elapsed += OnTimedEvent;
-        aTimer.AutoReset = true;
+        //aTimer.AutoReset = true;
         aTimer.Enabled = true;
-        startTime = DateTime.Now;
+
     }
 
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
-        var span = DateTime.Now - startTime;
-        model.ElapsedTime = span;
-        var currnet = model.Segments.FirstOrDefault(x => x.TimeStamp > span.TotalSeconds);
+        var currnet = model.Segments.FirstOrDefault(x => x.TimeStamp > player.CurrentPosition);
         if (currnet == null)
             return;
         var index = model.Segments.IndexOf(currnet);
@@ -69,7 +69,12 @@ public partial class ArticlePage : ContentPage
             model.Segments[index - 1].IsCurrent = false;
         currnet.IsCurrent = true;
     }
-
+    private void Stop()
+    {
+        if (player.IsPlaying)
+            player.Stop();
+        aTimer.Stop();
+    }
 
 
     async void Button_Clicked(System.Object sender, System.EventArgs e)
@@ -89,9 +94,21 @@ public partial class ArticlePage : ContentPage
         if (player == null)
         {
             player = audios.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("pumaatlarge.mp3"));
+            SetTimer();
         }
-        player.Play();
-        SetTimer();
+        if (player.IsPlaying)
+        {
+            player.Pause();
+            model.ButtonText = "Play";
+        }
+           
+        else
+        {
+            player.Play();
+            model.ButtonText = "Pause";
+        }
+          
+        
     }
 
 }
@@ -104,12 +121,7 @@ public partial class ArticlePageModel: ObservableObject
     int id;
 
     [ObservableProperty]
-    string test;
-
-    [ObservableProperty]
-    TimeSpan elapsedTime;
-
-
+    string buttonText;
 
     [ObservableProperty]
     ObservableCollection<ScriptSegment> segments = new ObservableCollection<ScriptSegment>();
