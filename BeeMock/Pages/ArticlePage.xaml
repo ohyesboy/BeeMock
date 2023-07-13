@@ -12,15 +12,11 @@
         <HorizontalStackLayout>
             <Button Text="go back" Clicked="Button_Clicked" />
             <Button Text="{Binding ButtonText}" Clicked="Play_Clicked" />
-
+            <Label Text="{Binding CurrentPosition,StringFormat='{0:hh\\:mm\\:ss\\.ff}'}" FontSize="35" HorizontalOptions="Center" />
         </HorizontalStackLayout>
 
         <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Always">
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Segments}" x:Name="linesPanel">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
-
-                </VerticalStackLayout.GestureRecognizers>
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout Margin="10" x:DataType="local:ScriptSegment">

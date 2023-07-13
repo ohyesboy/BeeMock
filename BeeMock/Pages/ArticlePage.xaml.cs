@@ -9,13 +9,7 @@ namespace BeeMock;
 
 public partial class ArticlePage : ContentPage
 {
-    [RelayCommand]
-    void SegTap(double startTime)
-    {
-        if (player == null)
-            return;
-        player.Seek(startTime-0.3);
-    }
+
     private readonly ArticlePageModel model;
     IAudioManager audios = ServiceHelper.GetService<IAudioManager>();
 
@@ -31,10 +25,11 @@ public partial class ArticlePage : ContentPage
         model.ButtonText = "Play";
     }
 
+
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        await LoadModel();
+        //await LoadModel();
     }
 
     private async Task LoadModel()
@@ -86,6 +81,9 @@ public partial class ArticlePage : ContentPage
 
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
+        if (!player.IsPlaying)
+            return;
+        model.CurrentPosition = TimeSpan.FromSeconds(player.CurrentPosition);
         var currentPosWordCutOff = player.CurrentPosition + 0.7;
         var currentPosSegCutOff = player.CurrentPosition + 0.3;
         foreach(var seg in model.Segments)
@@ -116,13 +114,6 @@ public partial class ArticlePage : ContentPage
         await Shell.Current.GoToAsync("..", true);
     }
 
-
-    void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
-    {
-
-
-    }
-
     async void Play_Clicked(System.Object sender, System.EventArgs e)
     {
         if (player == null)
@@ -141,61 +132,16 @@ public partial class ArticlePage : ContentPage
             player.Play();
             model.ButtonText = "Pause";
         }
-
-
     }
 
-    void Segment_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    [RelayCommand]
+    void SegTap(double startTime)
     {
-                 
-    }
-}
-
-
-[QueryProperty(nameof(Id), nameof(Id))]
-public partial class ArticlePageModel : ObservableObject
-{
-    [ObservableProperty]
-    int id;
-
-    [ObservableProperty]
-    string buttonText;
-
-    [ObservableProperty]
-    ObservableCollection<ScriptSegment> segments = new ObservableCollection<ScriptSegment>();
-
-}
-
-
-public partial class WordSegment : ObservableObject
-{
-
-    public double TimeStart { get; set; }
-    public double TimeEnd { get; set; }
-
-    public string Word { get; set; }
-    [ObservableProperty]
-    bool isCurrent;
-
-    partial void OnIsCurrentChanged(bool value)
-    {
-        if (!value)
+        if (player == null)
             return;
-        //
+        player.Seek(startTime - 0.3);
     }
 }
 
-public partial class ScriptSegment : ObservableObject
-{
-    public string Text { get; set; }
 
-    [ObservableProperty]
-    WordSegment[] wordSegs;
 
-    [ObservableProperty]
-    bool isCurrent;
-
-    public double TimeStart { get; set; }
-    public double TimeEnd { get; set; }
-
-}
