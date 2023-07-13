@@ -6,14 +6,14 @@
              x:DataType="local:ArticlePageModel"
              Title="ArticlePage"
              Shell.NavBarIsVisible="False">
-    <VerticalStackLayout>
+    <Grid RowDefinitions="auto,*">
         <HorizontalStackLayout>
             <Button Text="go back" Clicked="Button_Clicked" />
             <Button Text="{Binding ButtonText}" Clicked="Play_Clicked" />
 
         </HorizontalStackLayout>
 
-        <ScrollView>
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Segments}" x:Name="linesPanel">
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
@@ -23,9 +23,9 @@
                     <DataTemplate>
                         <VerticalStackLayout Margin="10" x:DataType="local:ScriptSegment">
                             <VerticalStackLayout.Style>
-                                <Style TargetType="Grid" >
+                                <Style TargetType="VerticalStackLayout" >
                                     <Style.Triggers>
-                                        <DataTrigger TargetType="Grid" Binding="{Binding IsCurrent}" Value="True">
+                                        <DataTrigger TargetType="VerticalStackLayout" Binding="{Binding IsCurrent}" Value="True">
                                             <Setter Property="BackgroundColor" Value="LightBlue"/>
                                         </DataTrigger>
 
@@ -34,7 +34,36 @@
                                 </Style>
                             </VerticalStackLayout.Style>
                             <Label HorizontalOptions="Start" Text="{Binding TimeStamp , StringFormat='{0:0.00}'}" FontSize="10"  WidthRequest="60" />
-                            <Label HorizontalOptions="Start" Text="{Binding Text}" TextColor="Gray" FontSize="20" LineBreakMode="WordWrap">
+                            <HorizontalStackLayout BindableLayout.ItemsSource="{Binding WordSegs}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="local:WordSegment">
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding Word}">
+                                                <Label.Style>
+                                                    <Style TargetType="Label" >
+                                                        <Style.Triggers>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding IsCurrent}" Value="True">
+                                                                <Setter Property="TextColor" Value="SteelBlue"/>
+
+                                                            </DataTrigger>
+
+                                                        </Style.Triggers>
+
+                                                    </Style>
+
+                                                </Label.Style>
+
+                                            </Label>
+
+                                            <Label Text=" " />
+
+                                        </HorizontalStackLayout>
+                                    </DataTemplate>
+
+                                </BindableLayout.ItemTemplate>
+
+                            </HorizontalStackLayout>
+                            <!--<Label HorizontalOptions="Start" Text="{Binding Text}" TextColor="Gray" FontSize="20" LineBreakMode="WordWrap">
                                 <Label.Style>
                                     <Style TargetType="Label" >
                                         <Style.Triggers>
@@ -48,7 +77,7 @@
                                     </Style>
 
                                 </Label.Style>
-                            </Label>
+                            </Label>-->
 
                         </VerticalStackLayout>
 
@@ -59,5 +88,5 @@
             </VerticalStackLayout>
 
         </ScrollView>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
