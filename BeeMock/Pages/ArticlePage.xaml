@@ -33,7 +33,7 @@
 
                                 </Style>
                             </VerticalStackLayout.Style>
-                            <Label HorizontalOptions="Start" Text="{Binding TimeStamp , StringFormat='{0:0.00}'}" FontSize="10"  WidthRequest="60" />
+                            <Label HorizontalOptions="Start" Text="{Binding TimeStart , StringFormat='{0:0.00}'}" FontSize="10"  WidthRequest="60" />
                             <HorizontalStackLayout BindableLayout.ItemsSource="{Binding WordSegs}">
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate x:DataType="local:WordSegment">

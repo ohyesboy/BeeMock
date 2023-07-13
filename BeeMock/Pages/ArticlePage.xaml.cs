@@ -27,41 +27,37 @@ public partial class ArticlePage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        var stream = await FileSystem.OpenAppPackageFileAsync("pumaatlarge_timeline2.txt");
+        await LoadModel();
+    }
+
+    private async Task LoadModel()
+    {
+        var stream = await FileSystem.OpenAppPackageFileAsync("pumaatlarge_timeline.txt");
         StreamReader sr = new StreamReader(stream);
-        var content = sr.ReadToEnd().Split(Environment.NewLine);
+        var lines = sr.ReadToEnd().Split(Environment.NewLine);
+        var srtSegs = SrtContent.ParseSRT(lines);
         stream.Close();
 
-        foreach (var line in content)
+        foreach (var srtSeg in srtSegs)
         {
-            var parts = line.Split('\t', 2);
-            if (parts.Length != 2)
-                continue;
-            var span = TimeSpan.Parse(parts[0]);
-            model.Segments.Add(new ScriptSegment { Text = parts[1], TimeStamp = span.TotalSeconds });
+            model.Segments.Add(new ScriptSegment { Text = srtSeg.Text, TimeStart = srtSeg.StartTime.TotalSeconds, TimeEnd = srtSeg.EndTime.TotalSeconds });
         }
-        for (int i = 0; i < model.Segments.Count; i++)
+
+        foreach(var seg in model.Segments)
         {
-            var seg = model.Segments[i];
-            var segIndex = model.Segments.IndexOf(seg);
-
-
             seg.WordSegs = seg.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => new WordSegment { Word = x })
                 .ToArray();
             if (seg.WordSegs.Length == 0)
                 continue;
-            var segTime = seg.TimeStamp / seg.WordSegs.Length;
+            var timePiece = (seg.TimeEnd - seg.TimeStart) / seg.WordSegs.Length;
             for (int wi = 0; wi < seg.WordSegs.Length; wi++)
             {
-                double prevSegTime = 0;
-                if (i > 0)
-                    prevSegTime = model.Segments[i-1].TimeStamp;
-                seg.WordSegs[wi].TimeStamp = prevSegTime + segTime * (wi + 1);
+                seg.WordSegs[wi].TimeStart = seg.TimeStart + timePiece * (wi + 0);
+                seg.WordSegs[wi].TimeEnd = seg.TimeStart + timePiece * (wi + 1);
             }
-          
-        }
 
+        }
     }
 
     protected override void OnDisappearing()
@@ -94,7 +90,7 @@ public partial class ArticlePage : ContentPage
 
         foreach (var word in model.Segments.SelectMany(x=>x.WordSegs))
         {
-            if (word.TimeStamp < player.CurrentPosition)
+            if ( word.TimeStart < player.CurrentPosition +0.3)
                 word.IsCurrent = true;
         }
     }
@@ -161,7 +157,9 @@ public partial class ArticlePageModel : ObservableObject
 public partial class WordSegment : ObservableObject
 {
 
-    public double TimeStamp { get; set; }
+    public double TimeStart { get; set; }
+    public double TimeEnd { get; set; }
+
     public string Word { get; set; }
     [ObservableProperty]
     bool isCurrent;
@@ -184,6 +182,7 @@ public partial class ScriptSegment : ObservableObject
     [ObservableProperty]
     bool isCurrent;
 
-    public double TimeStamp { get; set; }
+    public double TimeStart { get; set; }
+    public double TimeEnd { get; set; }
 
 }

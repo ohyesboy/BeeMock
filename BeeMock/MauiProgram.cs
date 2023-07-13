@@ -31,8 +31,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<HttpHelper>(httpClient);
         builder.Services.AddSingleton(AudioManager.Current);
 
-		builder.Services.AddSingleton<ArticlePage>();
-		builder.Services.AddSingleton<ArticlePageModel>();
+		builder.Services.AddTransient<ArticlePage>();
+		builder.Services.AddTransient<ArticlePageModel>();
 
         return builder.Build();
 	}
