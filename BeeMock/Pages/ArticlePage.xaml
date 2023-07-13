@@ -4,7 +4,9 @@
              x:Class="BeeMock.ArticlePage"
              xmlns:local="clr-namespace:BeeMock"
              x:DataType="local:ArticlePageModel"
+             x:Name="this"
              Title="ArticlePage"
+
              Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="auto,*">
         <HorizontalStackLayout>
@@ -13,7 +15,7 @@
 
         </HorizontalStackLayout>
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Always">
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Segments}" x:Name="linesPanel">
                 <VerticalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
@@ -33,8 +35,13 @@
 
                                 </Style>
                             </VerticalStackLayout.Style>
+                            <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding Path=SegTapCommand, Source={Reference this}}"
+                            CommandParameter="{Binding TimeStart}"/>
+                            </VerticalStackLayout.GestureRecognizers>
                             <Label HorizontalOptions="Start" Text="{Binding TimeStart , StringFormat='{0:0.00}'}" FontSize="10"  WidthRequest="60" />
-                            <HorizontalStackLayout BindableLayout.ItemsSource="{Binding WordSegs}">
+                            <FlexLayout AlignItems="Start" Wrap="Wrap" BindableLayout.ItemsSource="{Binding WordSegs}">
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate x:DataType="local:WordSegment">
                                         <HorizontalStackLayout>
@@ -62,7 +69,7 @@
 
                                 </BindableLayout.ItemTemplate>
 
-                            </HorizontalStackLayout>
+                            </FlexLayout>
                             <!--<Label HorizontalOptions="Start" Text="{Binding Text}" TextColor="Gray" FontSize="20" LineBreakMode="WordWrap">
                                 <Label.Style>
                                     <Style TargetType="Label" >

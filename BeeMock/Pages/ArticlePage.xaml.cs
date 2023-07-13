@@ -1,14 +1,21 @@
 ﻿using System.Collections.ObjectModel;
 using System.Timers;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls.Shapes;
 using Plugin.Maui.Audio;
 
 namespace BeeMock;
 
-
 public partial class ArticlePage : ContentPage
 {
+    [RelayCommand]
+    void SegTap(double startTime)
+    {
+        if (player == null)
+            return;
+        player.Seek(startTime-0.3);
+    }
     private readonly ArticlePageModel model;
     IAudioManager audios = ServiceHelper.GetService<IAudioManager>();
 
@@ -79,7 +86,7 @@ public partial class ArticlePage : ContentPage
 
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
-      
+
         //var currnet = model.Segments.FirstOrDefault(x => x.TimeStamp > player.CurrentPosition);
         //if (currnet == null)
         //    return;
@@ -88,11 +95,22 @@ public partial class ArticlePage : ContentPage
         //    model.Segments[index - 1].IsCurrent = false;
         //currnet.IsCurrent = true;
 
-        foreach (var word in model.Segments.SelectMany(x=>x.WordSegs))
+        double adjust = 0.7;
+        var currentPos = player.CurrentPosition + adjust;
+        foreach(var seg in model.Segments)
         {
-            if ( word.TimeStart < player.CurrentPosition +0.3)
-                word.IsCurrent = true;
+            foreach (var word in seg.WordSegs)
+            {
+                
+                if (word.TimeStart < currentPos
+                    && seg.TimeStart < currentPos
+                    && seg.TimeEnd > currentPos)
+                    word.IsCurrent = true;
+                else
+                    word.IsCurrent = false;
+            }
         }
+   
     }
     private void Stop()
     {
@@ -136,6 +154,10 @@ public partial class ArticlePage : ContentPage
 
     }
 
+    void Segment_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+                 
+    }
 }
 
 
