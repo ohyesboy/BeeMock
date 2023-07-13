@@ -86,25 +86,16 @@ public partial class ArticlePage : ContentPage
 
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
-
-        //var currnet = model.Segments.FirstOrDefault(x => x.TimeStamp > player.CurrentPosition);
-        //if (currnet == null)
-        //    return;
-        //var index = model.Segments.IndexOf(currnet);
-        //if (index > 0)
-        //    model.Segments[index - 1].IsCurrent = false;
-        //currnet.IsCurrent = true;
-
-        double adjust = 0.7;
-        var currentPos = player.CurrentPosition + adjust;
+        var currentPosWordCutOff = player.CurrentPosition + 0.7;
+        var currentPosSegCutOff = player.CurrentPosition + 0.3;
         foreach(var seg in model.Segments)
         {
             foreach (var word in seg.WordSegs)
             {
                 
-                if (word.TimeStart < currentPos
-                    && seg.TimeStart < currentPos
-                    && seg.TimeEnd > currentPos)
+                if (word.TimeStart < currentPosWordCutOff
+                    && seg.TimeStart < currentPosSegCutOff
+                    && seg.TimeEnd > currentPosSegCutOff)
                     word.IsCurrent = true;
                 else
                     word.IsCurrent = false;
