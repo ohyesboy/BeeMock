@@ -29,7 +29,7 @@ public partial class ArticlePage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        //await LoadModel();
+        await LoadModel();
     }
 
     private async Task LoadModel()
