@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Timers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls.Shapes;
 using Plugin.Maui.Audio;
 
 namespace BeeMock;
@@ -23,6 +23,7 @@ public partial class ArticlePage : ContentPage
         this.BindingContext = model;
         this.model = model;
         model.ButtonText = "Play";
+       
     }
 
 
@@ -84,16 +85,36 @@ public partial class ArticlePage : ContentPage
         if (!player.IsPlaying)
             return;
         model.CurrentPosition = TimeSpan.FromSeconds(player.CurrentPosition);
-        var currentPosWordCutOff = player.CurrentPosition + 0.7;
+        var currentPosWordCutOff = player.CurrentPosition + 1;
         var currentPosSegCutOff = player.CurrentPosition + 0.3;
         foreach(var seg in model.Segments)
         {
+            bool segInRange = seg.TimeStart < currentPosSegCutOff
+                    && seg.TimeEnd > currentPosSegCutOff;
+            if (segInRange)
+            {
+                if(seg.IsCurrent!=true)
+                {
+                    seg.IsCurrent = true;
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        // Code to run on the main thread
+                     
+                        segsView.ScrollTo(seg, position: ScrollToPosition.MakeVisible);
+                        Debug.WriteLine("-->SCROLL to " + seg.Text);
+                    });
+
+                }
+
+
+            }
+            else
+                seg.IsCurrent = false;
+
             foreach (var word in seg.WordSegs)
             {
                 
-                if (word.TimeStart < currentPosWordCutOff
-                    && seg.TimeStart < currentPosSegCutOff
-                    && seg.TimeEnd > currentPosSegCutOff)
+                if (word.TimeStart < currentPosWordCutOff && segInRange)
                     word.IsCurrent = true;
                 else
                     word.IsCurrent = false;
@@ -111,7 +132,11 @@ public partial class ArticlePage : ContentPage
 
     async void Button_Clicked(System.Object sender, System.EventArgs e)
     {
-        await Shell.Current.GoToAsync("..", true);
+       
+        //await scrollView.ScrollToAsync(0, 1000, true);
+        //var child = scrollView.GetChildElements(new Point());
+        //var count = child.Count;
+        //await Shell.Current.GoToAsync("..", true);
     }
 
     async void Play_Clicked(System.Object sender, System.EventArgs e)
@@ -135,12 +160,15 @@ public partial class ArticlePage : ContentPage
     }
 
     [RelayCommand]
-    void SegTap(double startTime)
+    void SegTap(ScriptSegment seg)
     {
         if (player == null)
             return;
-        player.Seek(startTime - 0.3);
+        player.Seek(seg.TimeStart - 0.3);
+   
     }
+
+
 }
 
 

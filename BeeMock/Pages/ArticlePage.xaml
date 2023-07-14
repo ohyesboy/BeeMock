@@ -8,14 +8,52 @@
              Title="ArticlePage"
 
              Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions="auto,*">
+    <Grid RowDefinitions="auto,*" x:Name="grid1">
         <HorizontalStackLayout>
             <Button Text="go back" Clicked="Button_Clicked" />
             <Button Text="{Binding ButtonText}" Clicked="Play_Clicked" />
             <Label Text="{Binding CurrentPosition,StringFormat='{0:hh\\:mm\\:ss\\.ff}'}" FontSize="35" HorizontalOptions="Center" />
         </HorizontalStackLayout>
+        <CollectionView
+            x:Name="segsView"
+            Grid.Row="1"
+            ItemsSource="{Binding Segments}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"></LinearItemsLayout>
 
-        <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Always">
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+           <Grid>
+                        <Label FontSize="28" LineBreakMode="WordWrap" Text="{Binding Text}"  x:DataType="local:ScriptSegment">
+                             <View.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Path=SegTapCommand, Source={Reference this}}"
+                                CommandParameter="{Binding .}"
+                                />
+
+                        </View.GestureRecognizers>
+                                               <View.Style>
+                                <Style TargetType="View" >
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="View" Binding="{Binding IsCurrent}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="LightBlue"/>
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+                            </View.Style>
+
+                        </Label>
+      
+              </Grid>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!--<ScrollView x:Name="scrollView" Grid.Row="1" HorizontalScrollBarVisibility="Always">
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Segments}" x:Name="linesPanel">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
@@ -66,21 +104,7 @@
                                 </BindableLayout.ItemTemplate>
 
                             </FlexLayout>
-                            <!--<Label HorizontalOptions="Start" Text="{Binding Text}" TextColor="Gray" FontSize="20" LineBreakMode="WordWrap">
-                                <Label.Style>
-                                    <Style TargetType="Label" >
-                                        <Style.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding IsCurrent}" Value="True">
-                                                <Setter Property="TextColor" Value="Black"/>
-
-                                            </DataTrigger>
-
-                                        </Style.Triggers>
-
-                                    </Style>
-
-                                </Label.Style>
-                            </Label>-->
+                           
 
                         </VerticalStackLayout>
 
@@ -90,6 +114,6 @@
 
             </VerticalStackLayout>
 
-        </ScrollView>
+        </ScrollView>-->
     </Grid>
 </ContentPage>
