@@ -42,7 +42,6 @@ public partial class ArticlePage : ContentPage
         stream.Close();
         var paras = JsonSerializer.Deserialize<List<ParagraphSave>>(jsonContent);
         model.Paragraphs = new ObservableCollection<ParagraphSave>(paras);
-        model.Segments = new ObservableCollection<SegmentSave>(paras.SelectMany(x => x.Segments));
     }
 
     protected override void OnDisappearing()
@@ -106,11 +105,7 @@ public partial class ArticlePage : ContentPage
 
     async void Button_Clicked(System.Object sender, System.EventArgs e)
     {
-       
-        //await scrollView.ScrollToAsync(0, 1000, true);
-        //var child = scrollView.GetChildElements(new Point());
-        //var count = child.Count;
-        //await Shell.Current.GoToAsync("..", true);
+        await Shell.Current.GoToAsync("..", true);
     }
 
     async void Play_Clicked(System.Object sender, System.EventArgs e)

@@ -12,15 +12,16 @@ public partial class ArticlePageModel : ObservableObject
     [ObservableProperty]
     string buttonText;
 
-    [ObservableProperty]
-    TimeSpan currentPosition;
+
+
+    TimeSpan _CurrentPosition;
+    public TimeSpan CurrentPosition { get => _CurrentPosition; set { if (_CurrentPosition == value) return; _CurrentPosition = value; OnPropertyChanged(); } }
+
 
 
     [ObservableProperty]
     ObservableCollection<ParagraphSave> paragraphs = new ObservableCollection<ParagraphSave>();
 
-    [ObservableProperty]
-    ObservableCollection<SegmentSave> segments = new ObservableCollection<SegmentSave>();
 }
 
 public class ParagraphSave

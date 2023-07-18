@@ -1,58 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BeeMock.ArticlePage"
-             xmlns:local="clr-namespace:BeeMock"
-             x:DataType="local:ArticlePageModel"
-             x:Name="this"
-             Title="ArticlePage"
-
-             Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions="auto,*" x:Name="grid1">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BeeMock.ArticlePage"
+    xmlns:local="clr-namespace:BeeMock"
+    x:DataType="local:ArticlePageModel"
+    x:Name="this"
+    Title="ArticlePage"
+    Shell.NavBarIsVisible="False">
+    <Grid
+        RowDefinitions="auto,*"
+        x:Name="grid1">
         <HorizontalStackLayout>
-            <Button Text="go back" Clicked="Button_Clicked" />
-            <Button Text="{Binding ButtonText}" Clicked="Play_Clicked" />
-            <Label Text="{Binding CurrentPosition,StringFormat='{0:hh\\:mm\\:ss\\.ff}'}" FontSize="35" HorizontalOptions="Center" />
+            <Button
+                Text="go back"
+                Clicked="Button_Clicked" />
+            <Button
+                Text="{Binding ButtonText}"
+                Clicked="Play_Clicked" />
+            <Label
+                Text="{Binding CurrentPosition,StringFormat='{0:hh\\:mm\\:ss\\.ff}'}"
+                FontSize="35"
+                HorizontalOptions="Center" />
         </HorizontalStackLayout>
+
+        <!--Paragraphs-->
         <CollectionView
             x:Name="segsView"
             Grid.Row="1"
-            ItemsSource="{Binding Segments}">
+            ItemsSource="{Binding Paragraphs}">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"></LinearItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="15"></LinearItemsLayout>
 
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="local:ParagraphSave">
+                    <VerticalStackLayout>
+                        <!--Paragraph.Segments-->
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Segments}">
+                            <BindableLayout.ItemTemplate>
+                                
+                                <DataTemplate x:DataType="local:SegmentSave">
 
-                   
+                                    <FlexLayout>
+                                        <Label
+                                            FlexLayout.AlignSelf="Start"
+                                            FlowDirection="LeftToRight"
+                                            FontSize="18"
+                                            LineBreakMode="WordWrap"
+                                            Text="{Binding Text}"
+                                            >
+                                            <View.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Path=SegTapCommand, Source={Reference this}}"
+                                                    CommandParameter="{Binding .}" />
 
+                                            </View.GestureRecognizers>
+                                            <View.Style>
+                                                <Style
+                                                    TargetType="View">
+                                                    <Style.Triggers>
+                                                        <DataTrigger
+                                                            TargetType="View"
+                                                            Binding="{Binding IsCurrent}"
+                                                            Value="True">
+                                                            <Setter
+                                                                Property="BackgroundColor"
+                                                                Value="LightBlue" />
+                                                        </DataTrigger>
 
-                    <Grid>
-                        <Label FontSize="18" LineBreakMode="WordWrap" Text="{Binding Text}"  x:DataType="local:SegmentSave">
-                             <View.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Path=SegTapCommand, Source={Reference this}}"
-                                CommandParameter="{Binding .}"
-                                />
+                                                    </Style.Triggers>
 
-                        </View.GestureRecognizers>
-                                               <View.Style>
-                                <Style TargetType="View" >
-                                    <Style.Triggers>
-                                        <DataTrigger TargetType="View" Binding="{Binding IsCurrent}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="LightBlue"/>
-                                        </DataTrigger>
+                                                </Style>
+                                            </View.Style>
 
-                                    </Style.Triggers>
+                                        </Label>
 
-                                </Style>
-                            </View.Style>
+                                    </FlexLayout>
 
-                        </Label>
-      
-              </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
 
+                        </VerticalStackLayout>
+                       
+                        <!--Paragraph.Translation-->
+                        <Label
+                            FontSize="18"
+                            LineBreakMode="WordWrap"
+                            Text="{Binding Translation}"
+                             />
+                    </VerticalStackLayout>
                 </DataTemplate>
 
             </CollectionView.ItemTemplate>
