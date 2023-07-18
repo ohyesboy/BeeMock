@@ -56,7 +56,7 @@
 	  <None Remove="Helpers\" />
 	  <None Remove="Resources\Raw\sound1.wav" />
 	  <None Remove="Resources\Raw\pumaatlarge.mp3" />
-	  <None Remove="Resources\Raw\pumaatlarge_timeline.txt" />
+	  <None Remove="Resources\Raw\pumaatlarge_all.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -87,6 +87,6 @@
 	<ItemGroup>
 	  <BundleResource Include="Resources\Raw\sound1.wav" />
 	  <BundleResource Include="Resources\Raw\pumaatlarge.mp3" />
-	  <BundleResource Include="Resources\Raw\pumaatlarge_timeline.txt" />
+	  <BundleResource Include="Resources\Raw\pumaatlarge_all.json" />
 	</ItemGroup>
 </Project>

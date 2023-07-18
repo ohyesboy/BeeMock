@@ -25,57 +25,11 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <FlexLayout AlignItems="Start" Wrap="Wrap"  x:DataType="local:ScriptSegment" BindableLayout.ItemsSource="{Binding WordSegs}">
-                        <View.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Path=SegTapCommand, Source={Reference this}}"
-                                CommandParameter="{Binding .}" />
-
-                        </View.GestureRecognizers>
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="local:WordSegment">
-
-                                <HorizontalStackLayout>
-                                    <View.Style>
-                                        <Style TargetType="View" >
-                                            <Style.Triggers>
-                                                <DataTrigger TargetType="View" Binding="{Binding IsCurrent}" Value="True">
-                                                    <Setter Property="BackgroundColor" Value="LightBlue"/>
-                                                </DataTrigger>
-
-                                            </Style.Triggers>
-
-                                        </Style>
-                                    </View.Style>
-                                    <Label FontSize="16" Text="{Binding Word}">
-                                        <!--<Label.Style>
-                                            <Style TargetType="Label" >
-                                                <Style.Triggers>
-                                                    <DataTrigger TargetType="Label" Binding="{Binding IsCurrent}" Value="True">
-                                                        <Setter Property="TextColor" Value="SteelBlue"/>
-
-                                                    </DataTrigger>
-
-                                                </Style.Triggers>
-
-                                            </Style>
-
-                                        </Label.Style>-->
-
-                                    </Label>
-
-                                    <Label FontSize="16" Text=" " />
-
-                                </HorizontalStackLayout>
-                            </DataTemplate>
-
-                        </BindableLayout.ItemTemplate>
-
-                    </FlexLayout>
+                   
 
 
-                    <!--<Grid>
-                        <Label FontSize="28" LineBreakMode="WordWrap" Text="{Binding Text}"  x:DataType="local:ScriptSegment">
+                    <Grid>
+                        <Label FontSize="18" LineBreakMode="WordWrap" Text="{Binding Text}"  x:DataType="local:SegmentSave">
                              <View.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding Path=SegTapCommand, Source={Reference this}}"
@@ -97,7 +51,7 @@
 
                         </Label>
       
-              </Grid>-->
+              </Grid>
 
                 </DataTemplate>
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Text.Json;
 using System.Timers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -35,32 +36,13 @@ public partial class ArticlePage : ContentPage
 
     private async Task LoadModel()
     {
-        var stream = await FileSystem.OpenAppPackageFileAsync("pumaatlarge_timeline.txt");
+        var stream = await FileSystem.OpenAppPackageFileAsync("pumaatlarge_all.json");
         StreamReader sr = new StreamReader(stream);
-        var lines = sr.ReadToEnd().Split(Environment.NewLine);
-        var srtSegs = SrtContent.ParseSRT(lines);
+        var jsonContent = sr.ReadToEnd();
         stream.Close();
-
-        foreach (var srtSeg in srtSegs)
-        {
-            model.Segments.Add(new ScriptSegment { Text = srtSeg.Text, TimeStart = srtSeg.StartTime.TotalSeconds, TimeEnd = srtSeg.EndTime.TotalSeconds });
-        }
-
-        foreach(var seg in model.Segments)
-        {
-            seg.WordSegs = seg.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => new WordSegment { Word = x })
-                .ToArray();
-            if (seg.WordSegs.Length == 0)
-                continue;
-            var timePiece = (seg.TimeEnd - seg.TimeStart) / seg.WordSegs.Length;
-            for (int wi = 0; wi < seg.WordSegs.Length; wi++)
-            {
-                seg.WordSegs[wi].TimeStart = seg.TimeStart + timePiece * (wi + 0);
-                seg.WordSegs[wi].TimeEnd = seg.TimeStart + timePiece * (wi + 1);
-            }
-
-        }
+        var paras = JsonSerializer.Deserialize<List<ParagraphSave>>(jsonContent);
+        model.Paragraphs = new ObservableCollection<ParagraphSave>(paras);
+        model.Segments = new ObservableCollection<SegmentSave>(paras.SelectMany(x => x.Segments));
     }
 
     protected override void OnDisappearing()
@@ -87,10 +69,10 @@ public partial class ArticlePage : ContentPage
         model.CurrentPosition = TimeSpan.FromSeconds(player.CurrentPosition);
         var currentPosWordCutOff = player.CurrentPosition + 1;
         var currentPosSegCutOff = player.CurrentPosition + 0.3;
-        foreach(var seg in model.Segments)
+        foreach(var seg in model.Paragraphs.SelectMany(x=>x.Segments))
         {
-            bool segInRange = seg.TimeStart < currentPosSegCutOff
-                    && seg.TimeEnd > currentPosSegCutOff;
+            bool segInRange = seg.TimeStart.TotalSeconds < currentPosSegCutOff
+                    && seg.TimeEnd.TotalSeconds > currentPosSegCutOff;
             if (segInRange)
             {
                 if(seg.IsCurrent!=true)
@@ -111,14 +93,6 @@ public partial class ArticlePage : ContentPage
             else
                 seg.IsCurrent = false;
 
-            foreach (var word in seg.WordSegs)
-            {
-                
-                if (word.TimeStart < currentPosWordCutOff && segInRange)
-                    word.IsCurrent = true;
-                else
-                    word.IsCurrent = false;
-            }
         }
    
     }
@@ -160,12 +134,12 @@ public partial class ArticlePage : ContentPage
     }
 
     [RelayCommand]
-    void SegTap(ScriptSegment seg)
+    void SegTap(SegmentSave seg)
     {
         if (player == null)
             return;
-        player.Seek(seg.TimeStart - 0.3);
-   
+        player.Seek(seg.TimeStart.TotalSeconds - 0.3);
+
     }
 
 
