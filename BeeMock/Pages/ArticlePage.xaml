@@ -36,61 +36,63 @@
 
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="local:ParagraphSave">
+                <DataTemplate
+                    x:DataType="local:ParagraphSave">
                     <VerticalStackLayout>
-                        <!--Paragraph.Segments-->
-                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Segments}">
+                        <!--Paragraph.Words-->
+                        <Frame>
+
+
+
+                        <FlexLayout
+                        
+                            Wrap="Wrap"
+                            BindableLayout.ItemsSource="{Binding Words}">
                             <BindableLayout.ItemTemplate>
-                                
-                                <DataTemplate x:DataType="local:SegmentSave">
+                                <DataTemplate
+                                    x:DataType="local:Word">
+                                    <Label
+                                        FontSize="18"
+                                        Text="{Binding Text}"
+                                        BackgroundColor="AliceBlue">
+                                        <View.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Path=SegTapCommand, Source={Reference this}}"
+                                                CommandParameter="{Binding ParentSegment}" />
 
-                                    <FlexLayout>
-                                        <Label
-                                            FlexLayout.AlignSelf="Start"
-                                            FlowDirection="LeftToRight"
-                                            FontSize="18"
-                                            LineBreakMode="WordWrap"
-                                            Text="{Binding Text}"
-                                            >
-                                            <View.GestureRecognizers>
-                                                <TapGestureRecognizer
-                                                    Command="{Binding Path=SegTapCommand, Source={Reference this}}"
-                                                    CommandParameter="{Binding .}" />
+                                        </View.GestureRecognizers>
+                                        <Label.Style>
+                                            <Style
+                                                TargetType="View">
+                                                <Style.Triggers>
+                                                    <DataTrigger
+                                                        TargetType="View"
+                                                        Binding="{Binding ParentSegment.IsCurrent}"
+                                                        Value="True">
+                                                        <Setter
+                                                            Property="BackgroundColor"
+                                                            Value="LightBlue" />
+                                                    </DataTrigger>
 
-                                            </View.GestureRecognizers>
-                                            <View.Style>
-                                                <Style
-                                                    TargetType="View">
-                                                    <Style.Triggers>
-                                                        <DataTrigger
-                                                            TargetType="View"
-                                                            Binding="{Binding IsCurrent}"
-                                                            Value="True">
-                                                            <Setter
-                                                                Property="BackgroundColor"
-                                                                Value="LightBlue" />
-                                                        </DataTrigger>
+                                                </Style.Triggers>
 
-                                                    </Style.Triggers>
-
-                                                </Style>
-                                            </View.Style>
-
-                                        </Label>
-
-                                    </FlexLayout>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
 
                                 </DataTemplate>
+
                             </BindableLayout.ItemTemplate>
 
-                        </VerticalStackLayout>
-                       
+                        </FlexLayout>
+
+
+                                                    </Frame>
                         <!--Paragraph.Translation-->
                         <Label
                             FontSize="18"
                             LineBreakMode="WordWrap"
-                            Text="{Binding Translation}"
-                             />
+                            Text="{Binding Translation}" />
                     </VerticalStackLayout>
                 </DataTemplate>
 

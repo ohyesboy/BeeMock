@@ -28,15 +28,21 @@ public class ParagraphSave
 {
     public string Translation { get; set; }
     public List<SegmentSave> Segments { get; set; }
+
+    public Word[] Words { get; set; }
 }
 
 public partial class SegmentSave : ObservableObject
 {
-    [ObservableProperty]
-    int order;
 
-    [ObservableProperty]
-    string text;
+    int _Order;
+    public int Order { get => _Order; set { if (_Order == value) return; _Order = value; OnPropertyChanged(); } }
+
+
+
+    string _Text;
+    public string Text { get => _Text; set { if (_Text == value) return; _Text = value; OnPropertyChanged(); } }
+
 
 
     TimeSpan _TimeStart;
@@ -47,7 +53,15 @@ public partial class SegmentSave : ObservableObject
     public TimeSpan TimeEnd { get => _TimeEnd; set { if (_TimeEnd == value) return; _TimeEnd = value; OnPropertyChanged(); } }
 
 
-    [ObservableProperty]
-    bool isCurrent;
 
+    bool _IsCurrent;
+    public bool IsCurrent { get => _IsCurrent; set { if (_IsCurrent == value) return; _IsCurrent = value; OnPropertyChanged(); } }
+
+
+}
+
+public class Word
+{
+    public string Text { get; set; }
+    public SegmentSave ParentSegment { get; set; }
 }

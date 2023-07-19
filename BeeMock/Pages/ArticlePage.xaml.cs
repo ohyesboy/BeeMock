@@ -24,7 +24,7 @@ public partial class ArticlePage : ContentPage
         this.BindingContext = model;
         this.model = model;
         model.ButtonText = "Play";
-       
+
     }
 
 
@@ -42,6 +42,13 @@ public partial class ArticlePage : ContentPage
         stream.Close();
         var paras = JsonSerializer.Deserialize<List<ParagraphSave>>(jsonContent);
         model.Paragraphs = new ObservableCollection<ParagraphSave>(paras);
+        foreach (var p in paras)
+        {
+            p.Words = p.Segments
+                .SelectMany(x => x.Text.Split(' ').Select(x => x + " ")
+                    .Select(w => new Word { Text = w, ParentSegment = x }))
+                .ToArray();
+        }
     }
 
     protected override void OnDisappearing()
@@ -68,35 +75,35 @@ public partial class ArticlePage : ContentPage
         model.CurrentPosition = TimeSpan.FromSeconds(player.CurrentPosition);
         var currentPosWordCutOff = player.CurrentPosition + 1;
         var currentPosSegCutOff = player.CurrentPosition + 0.3;
-        foreach(var seg in model.Paragraphs.SelectMany(x=>x.Segments))
+        foreach (var seg in model.Paragraphs.SelectMany(x => x.Segments))
         {
             bool segInRange = seg.TimeStart.TotalSeconds < currentPosSegCutOff
                     && seg.TimeEnd.TotalSeconds > currentPosSegCutOff;
             if (segInRange)
             {
-                if(seg.IsCurrent!=true)
+                
+                if (seg.IsCurrent != true)
                 {
                     seg.IsCurrent = true;
                     MainThread.BeginInvokeOnMainThread(() =>
                     {
                         // Code to run on the main thread
-                     
+                       
                         segsView.ScrollTo(seg, position: ScrollToPosition.MakeVisible);
                         Debug.WriteLine("-->SCROLL to " + seg.Text);
                     });
-
                 }
-
-
             }
             else
                 seg.IsCurrent = false;
 
         }
-   
+
     }
     private void Stop()
     {
+        if (player == null)
+            return;
         if (player.IsPlaying)
             player.Stop();
         aTimer.Stop();
