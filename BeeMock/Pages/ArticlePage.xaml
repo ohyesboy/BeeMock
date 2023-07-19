@@ -70,7 +70,7 @@
                                                         Binding="{Binding ParentSegment.IsCurrent}"
                                                         Value="True">
                                                         <Setter
-                                                            Property="BackgroundColor"
+                                                            Property="Background"
                                                             Value="LightBlue" />
                                                     </DataTrigger>
 

@@ -73,7 +73,7 @@ public partial class ArticlePage : ContentPage
         if (!player.IsPlaying)
             return;
         model.CurrentPosition = TimeSpan.FromSeconds(player.CurrentPosition);
-        var currentPosWordCutOff = player.CurrentPosition + 1;
+
         var currentPosSegCutOff = player.CurrentPosition + 0.3;
         foreach (var seg in model.Paragraphs.SelectMany(x => x.Segments))
         {
